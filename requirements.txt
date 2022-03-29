@@ -1,0 +1,33 @@
+Functional Requirements:
+	- Jobseeker and employer can register their accounts
+	- Verify registered email address of jobseeker and employer
+	- Jobseeker and employer can recover their passwords 
+
+	# Jobseeker can do following things:
+		- Search Jobs by using keywords, Category, Industries, Education, Job type
+		- Update their personal information like CV, Skills, Location, Jobs preference
+		- Apply multiple jobs
+		- Maintain profile confidential(hide profile except from employer 
+			for whom you have applied the job) 
+		- Turn on/off new job alert notification
+		- Add their social accounts
+		- Change email and password
+		- Deactivate account
+		- Job list must be shown on job preference
+		- Save jobs for later and Unsave jobs if not interested 
+		- Send messages to employer and admin
+
+	# Employer can do the following things:
+		- Search, View and Download CV for the required job by using keywords or job category
+		- Add new job wih detailed job descriptions
+		- Update their information
+		- Send notification/message or reply to the jobseeker and admin
+
+	# Administrator can do the following things:
+		- Get the information of jobseeker and employer
+		- Manage jobseeker and employer account 
+		- Send notification messages to jobseeker and employer
+		- Approve/Unapprove jobs
+		- Add Featured job
+		- Update website setting
+		- Update companies policies
