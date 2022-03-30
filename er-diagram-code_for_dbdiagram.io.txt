@@ -1,0 +1,143 @@
+// Creating tables
+Table front_users as U {
+  id bigint [pk, increment] // auto-increment
+  name varchar
+  email varchar
+  email_verified_at timestamp
+  password varchar
+  user_type varchar
+  phone_no varchar
+  current_address varchar
+  permanent_address varchar
+  website varchar
+  social_links text 
+  gender varchar
+  dob date 
+  remember_token varchar
+  industry_id bigint
+  profile_photo_path text 
+  status varchar
+  org_name varchar
+  content mediumtext 
+  featured tinyint 
+  location_id bigint
+}
+
+Table front_user_job {
+  id bigint [pk]
+  front_user_id bigint 
+  job_id bigint
+ }
+
+Table front_user_skill as fus {
+  id bigint [pk]
+  front_user_id bigint
+  skill_id bigint
+}
+
+Table industries {
+  id bigint [pk] 
+  name varchar
+}
+
+Table jobs {
+  id bigint [pk]
+  front_user_id bigint 
+  skill_id bigint 
+  title varchar
+  application_email varchar
+  application_url varchar
+  job_type job_type 
+  tags varchar
+  description text 
+  responsibility text 
+  requirements text 
+  experience varchar
+  min_salary int
+  max_salary int
+  status job_status 
+  featured tinyint
+  last_date date 
+  top_jobs tinyint 
+  views int  
+  openings int
+}
+// Enum for 'jobs' table below
+Enum job_status {
+  active
+  pending
+  rejected
+  expired
+}
+Enum job_type {
+  fulltime
+  parttime
+  internship
+  others
+}
+
+Table job_applications {
+  id bigint [pk]
+  job_id bigint 
+  applicant_id bigint 
+  cv_path varchar
+  expected_salary varchar
+  status application_status
+}
+// Enum for 'job_applications' table below
+Enum application_status {
+  pending
+  Shortlisted
+  rejected
+  blocked
+}
+
+Table job_skill {
+  id bigint [pk]
+  job_id bigint 
+  skill_id bigint 
+}
+
+Table locations {
+    id int [pk]
+  name varchar
+}
+
+Table resumes {
+    id bigint [pk]
+  front_user_id bigint 
+  education text 
+  training text 
+  experience mediumtext 
+  language text 
+  social_account text 
+  cv_path text
+}
+
+Table skills{
+    id bigint [pk]
+  name varchar
+}
+
+// Creating references
+// You can also define relaionship separately
+// > many-to-one; < one-to-many; - one-to-one
+
+// Front User relationship
+Ref: U.industry_id > industries.id  
+Ref: U.id < fus.front_user_id
+Ref: skills.id < fus.skill_id
+Ref: U.location_id > locations.id
+Ref: U.id < jobs.front_user_id
+Ref: U.id - resumes.front_user_id
+Ref: U.id < job_applications.applicant_id
+
+//----------------------------------------------//
+// Jobs relationship
+Ref: jobs.id < job_applications.job_id
+Ref: jobs.id < job_skill.job_id
+Ref: skills.id < job_skill.skill_id
+Ref: jobs.id < front_user_job.job_id
+Ref: U.id < front_user_job.front_user_id
+
+//----------------------------------------------//
