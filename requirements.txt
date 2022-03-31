@@ -35,3 +35,4 @@ Functional Requirements:
 		- Add Featured job
 		- Update website setting
 		- Update companies policies
+		- manage roles and permissions
