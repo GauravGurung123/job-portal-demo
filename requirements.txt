@@ -1,7 +1,8 @@
 Functional Requirements:
 	- Jobseeker and employer can register their accounts
 	- Verify registered email address of jobseeker and employer
-	- Jobseeker and employer can recover their passwords 
+	- Jobseeker and employer can recover their passwords
+	- Count vacancy views
 
 	# Jobseeker can do following things:
 		- Search Jobs by using keywords, Category, Industries, Education, Job type
@@ -19,12 +20,15 @@ Functional Requirements:
 
 	# Employer can do the following things:
 		- Search, View and Download CV for the required job by using keywords or job category
-		- Add new job wih detailed job descriptions
+		- Add new / edit /delete job
 		- Update their information
+		- view list or detailed information of job applicants
 		- Send notification/message or reply to the jobseeker and admin
+		- Deactivate account		
 
 	# Administrator can do the following things:
 		- Get the information of jobseeker and employer
+		- Create new account for jobseeker and employer
 		- Manage jobseeker and employer account 
 		- Send notification messages to jobseeker and employer
 		- Approve/Unapprove jobs
