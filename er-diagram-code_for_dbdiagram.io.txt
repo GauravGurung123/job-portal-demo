@@ -119,6 +119,29 @@ Table skills{
   name varchar
 }
 
+Table roles {
+    id bigint [pk]
+  name varchar
+  guard_name varchar
+}
+
+Table permissions {
+    id bigint [pk]
+  name varchar
+  guard_name varchar
+}
+
+Table role_permission {
+  role_id bigint 
+  permission_id bigint 
+}
+
+Table user_role {
+  id bigint 
+  user_id bigint 
+  role_id bigint 
+}
+
 // Creating references
 // You can also define relaionship separately
 // > many-to-one; < one-to-many; - one-to-one
@@ -131,6 +154,7 @@ Ref: U.location_id > locations.id
 Ref: U.id < jobs.front_user_id
 Ref: U.id - resumes.front_user_id
 Ref: U.id < job_applications.applicant_id
+Ref: U.id < user_role.user_id
 
 //----------------------------------------------//
 // Jobs relationship
@@ -139,5 +163,9 @@ Ref: jobs.id < job_skill.job_id
 Ref: skills.id < job_skill.skill_id
 Ref: jobs.id < front_user_job.job_id
 Ref: U.id < front_user_job.front_user_id
+
+Ref: roles.id < user_role.role_id
+Ref: roles.id < role_permission.role_id
+Ref: permissions.id < role_permission.permission_id
 
 //----------------------------------------------//
