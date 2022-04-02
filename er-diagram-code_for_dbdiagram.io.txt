@@ -1,11 +1,24 @@
 // Creating tables
-Table front_users as U {
-  id bigint [pk, increment] // auto-increment
+
+Table admins {
+  id bigint [pk] // auto-increment
+  role_id bigint 
+  name varchar
+  email varchar
+  slug varchar
+  email_verified_at timestamp
+  password varchar
+  remember_token varchar
+  profile_photo_path text 
+}
+
+Table jobseekers as JU {
+  id bigint [pk] // auto-increment
+  role_id bigint 
   name varchar
   email varchar
   email_verified_at timestamp
   password varchar
-  user_type varchar
   phone_no varchar
   current_address varchar
   permanent_address varchar
@@ -14,35 +27,58 @@ Table front_users as U {
   gender varchar
   dob date 
   remember_token varchar
+  profile_photo_path text 
+  status varchar
+  content mediumtext 
+  slug varchar
+}
+
+Table employers as EU {
+  id bigint [pk] // auto-increment
+  role_id bigint 
+  name varchar
+  org_name varchar
+  email varchar
+  email_verified_at timestamp
+  password varchar
+  phone_no varchar
+  website varchar
+  social_links text 
+  remember_token varchar
   industry_id bigint
   profile_photo_path text 
   status varchar
-  org_name varchar
   content mediumtext 
-  featured tinyint 
   location_id bigint
 }
 
-Table front_user_job {
+Table job_jobseeker as JJ {
   id bigint [pk]
-  front_user_id bigint 
+  jobseeker_id bigint 
   job_id bigint
- }
+}
 
-Table front_user_skill as fus {
+Table jobseeker_favorites as JF {
   id bigint [pk]
-  front_user_id bigint
+  jobseeker_id bigint
+  job_id bigint
+}
+
+Table employer_jobseeker_skill as FUS {
+  employer_id bigint
+  jobseeker_id bigint
   skill_id bigint
 }
 
 Table industries {
   id bigint [pk] 
   name varchar
+  slug string 
 }
 
 Table jobs {
   id bigint [pk]
-  front_user_id bigint 
+  employer_id bigint 
   skill_id bigint 
   title varchar
   application_email varchar
@@ -61,6 +97,7 @@ Table jobs {
   top_jobs tinyint 
   views int  
   openings int
+  slug varchar
 }
 // Enum for 'jobs' table below
 Enum job_status {
@@ -79,7 +116,7 @@ Enum job_type {
 Table job_applications {
   id bigint [pk]
   job_id bigint 
-  applicant_id bigint 
+  jobseeker_id bigint 
   cv_path varchar
   expected_salary varchar
   status application_status
@@ -101,11 +138,12 @@ Table job_skill {
 Table locations {
     id int [pk]
   name varchar
+  slug varchar
 }
 
 Table resumes {
     id bigint [pk]
-  front_user_id bigint 
+  jobseeker_id bigint 
   education text 
   training text 
   experience mediumtext 
@@ -117,18 +155,17 @@ Table resumes {
 Table skills{
     id bigint [pk]
   name varchar
+  slug varchar
 }
 
 Table roles {
     id bigint [pk]
   name varchar
-  guard_name varchar
 }
 
 Table permissions {
     id bigint [pk]
   name varchar
-  guard_name varchar
 }
 
 Table role_permission {
@@ -136,35 +173,33 @@ Table role_permission {
   permission_id bigint 
 }
 
-Table user_role {
-  id bigint 
-  user_id bigint 
-  role_id bigint 
-}
-
 // Creating references
 // You can also define relaionship separately
 // > many-to-one; < one-to-many; - one-to-one
 
 // Front User relationship
-Ref: U.industry_id > industries.id  
-Ref: U.id < fus.front_user_id
-Ref: skills.id < fus.skill_id
-Ref: U.location_id > locations.id
-Ref: U.id < jobs.front_user_id
-Ref: U.id - resumes.front_user_id
-Ref: U.id < job_applications.applicant_id
-Ref: U.id < user_role.user_id
+Ref: EU.industry_id > industries.id  
+Ref: JU.id < FUS.jobseeker_id
+Ref: EU.id < FUS.employer_id
+Ref: skills.id < FUS.skill_id
+Ref: EU.location_id > locations.id
+Ref: EU.id < jobs.employer_id
+Ref: JU.id - resumes.jobseeker_id
+Ref: JU.id < job_applications.jobseeker_id
+Ref: JU.role_id - roles.id
+Ref: EU.role_id - roles.id
+Ref: admins.role_id - roles.id
 
 //----------------------------------------------//
 // Jobs relationship
+Ref: JU.id < JF.jobseeker_id
+Ref: jobs.id - JF.job_id
 Ref: jobs.id < job_applications.job_id
 Ref: jobs.id < job_skill.job_id
 Ref: skills.id < job_skill.skill_id
-Ref: jobs.id < front_user_job.job_id
-Ref: U.id < front_user_job.front_user_id
+Ref: jobs.id < JJ.job_id
+Ref: JU.id < JJ.jobseeker_id
 
-Ref: roles.id < user_role.role_id
 Ref: roles.id < role_permission.role_id
 Ref: permissions.id < role_permission.permission_id
 
