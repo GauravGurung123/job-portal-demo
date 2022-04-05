@@ -9,6 +9,8 @@ class Location extends Model
 {
     use HasFactory;
     
+    public $timestamps = false;
+    
     /**
      * fillable
      *
@@ -18,4 +20,9 @@ class Location extends Model
         'name',
         'slug',
     ];
+
+    public function employers()
+    {
+        return $this->hasMany('App\Models\Employer', 'location_id', 'id');
+    }
 }

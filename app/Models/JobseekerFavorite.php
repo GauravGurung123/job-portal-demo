@@ -18,4 +18,14 @@ class JobseekerFavorite extends Model
         'jobseeker_id',
         'job_id',
     ];
+
+    public function jobseeker()
+    {
+        return $this->belongsTo('App\Models\Jobseeker', 'jobseeker_id', 'id');
+    }
+    
+    public function job()
+    {
+        return $this->belongsTo('App\Models\Job', 'job_id', 'id');
+    }
 }

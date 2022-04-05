@@ -18,4 +18,9 @@ class Resume extends Model
         'social_links',
         'cv_path',
     ];
+
+    public function jobseeker()
+    {
+        return $this->belongsTo('App\Models\Jobseeker');
+    }
 }

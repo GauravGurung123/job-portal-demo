@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Industry extends Model
 {
     use HasFactory;
-    
+
+    public $timestamps = false;
     /**
      * fillable
      *
@@ -18,4 +19,10 @@ class Industry extends Model
         'name',
         'slug',
     ];
+
+    public function employers()
+    {
+        return $this->hasMany('App\Models\Employer', 'industry_id', 'id');
+    }
 }
+

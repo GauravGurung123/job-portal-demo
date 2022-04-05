@@ -35,4 +35,36 @@ class Job extends Model
         'openings',
         'slug',
     ];
+
+    /**
+     * jobs required many skills 
+     * skills have polymorphic relationship
+     * 
+     * @return void
+     */
+    public function skills()
+    {
+        return $this->morphMany('App\Models\Skill', 'skillable');
+    }
+    
+    /**
+     * job belongs to employer
+     *
+     * @return void
+     */
+    public function employer()
+    {
+        return $this->belongsTo('App\Models\Employer', 'employer_id', 'id');
+    }
+ 
+    public function jobFavorite()
+    {
+        return $this->hasOne('App\Models\JobFavorite', 'job_id', 'id');
+    }
+
+    public function jobApplications()
+    {
+        return $this->hasMany('App\Models\JobApplication', 'job_id', 'id');
+    }
 }
+

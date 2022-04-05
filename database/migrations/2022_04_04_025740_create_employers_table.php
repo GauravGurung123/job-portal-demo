@@ -24,8 +24,6 @@ class CreateEmployersTable extends Migration
             $table->string('slug');
             $table->string('phone_no')->nullable();
             $table->string('website')->nullable();
-            $table->date('dob')->nullable();
-            $table->string('gender')->nullable();
             $table->enum('status', ['Active', 'Blocked'])->default('Active');
             $table->text('social_links')->nullable();
             $table->text('profile_photo_path');

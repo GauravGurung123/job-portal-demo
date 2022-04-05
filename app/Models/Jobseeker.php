@@ -53,4 +53,30 @@ class Jobseeker extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function skills()
+    {
+        return $this->morphMany('App\Models\Skill', 'skillable');
+    }
+
+    public function role()
+    {
+        return $this->hasOne('App\Models\Role');
+    }
+
+    public function resume()
+    {
+        return $this->hasOne('App\Models\Resume');
+    }
+
+    public function jobApplications()
+    {
+        return $this->hasMany('App\Models\JobApplication', 'jobseeker_id', 'id');
+    }
+
+    public function jobseekerFavorites()
+    {
+        return $this->hasMany('App\Models\JobseekerFavorite', 'jobseeker_id', 'id');
+    }
+
 }
