@@ -30,8 +30,9 @@ class CreateEmployersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('token');
+            $table->string('token')->unique();
             $table->dateTime('token_expiry');
+            $table->dateTime('last_logged_in')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
