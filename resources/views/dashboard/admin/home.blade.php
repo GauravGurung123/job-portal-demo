@@ -34,6 +34,9 @@
                          <tbody>
                              <tr>
                                  <td scope="row"></td>
+                                 <td>{{ auth()->user()->email}}</td>
+                                 <td>{{ auth()->user()->name}}</td>
+                                 <td>{{ auth()->user()->username}}</td>
                                  <td></td>
                                  <td></td>
                                  <td>

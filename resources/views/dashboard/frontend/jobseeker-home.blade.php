@@ -28,7 +28,7 @@
                          <tr>
                              <th>Name</th>
                              <th>Email</th>
-                             <th>Hospital</th>
+                             <th>Location</th>
                              <th>Action</th>
                          </tr>
                          </thead>

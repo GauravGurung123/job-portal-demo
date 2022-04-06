@@ -15,7 +15,7 @@ class CreateEmployersTable extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('role_id')->unsigned();
+            
             $table->bigInteger('industry_id')->unsigned();
             $table->bigInteger('location_id')->unsigned();
             $table->string('username')->unique();
@@ -30,10 +30,12 @@ class CreateEmployersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('token');
+            $table->dateTime('token_expiry');
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles');
+
             $table->foreign('industry_id')->references('id')->on('industries');
             $table->foreign('location_id')->references('id')->on('locations');
         });

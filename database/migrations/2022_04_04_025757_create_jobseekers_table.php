@@ -15,7 +15,7 @@ class CreateJobseekersTable extends Migration
     {
         Schema::create('jobseekers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('role_id')->unsigned();
+            
             $table->string('name');
             $table->string('username')->unique();
             $table->text('content')->nullable();
@@ -32,10 +32,10 @@ class CreateJobseekersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('token');
+            $table->dateTime('token_expiry');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('role_id')->references('id')->on('roles');
 
         });
     }

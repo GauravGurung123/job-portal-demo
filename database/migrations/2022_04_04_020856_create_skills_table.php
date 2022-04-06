@@ -19,6 +19,9 @@ class CreateSkillsTable extends Migration
             $table->string('skillable_type');
             $table->string('name');
             $table->string('slug');
+            $table->string('status')->nullable();
+            $table->timestamps();
+
         });
     }
 

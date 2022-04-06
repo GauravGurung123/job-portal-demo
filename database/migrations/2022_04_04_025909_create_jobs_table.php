@@ -16,7 +16,9 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();       
             $table->bigInteger('employer_id')->unsigned();       
-            $table->bigInteger('skill_id')->unsigned();       
+            $table->bigInteger('skill_id')->unsigned();  
+            $table->bigInteger('location_id')->unsigned();       
+            $table->bigInteger('industries_id')->unsigned();       
             $table->string('title');
             $table->string('application_email')->nullable();
             $table->string('application_url')->nullable();
@@ -29,7 +31,7 @@ class CreateJobsTable extends Migration
             $table->bigInteger('max_salary')->unsigned();
             $table->enum('status', ['Active', 'Pending', 'Rejected', 'Expired'])->default('Pending');
             $table->boolean('featured')->default(0);
-            $table->boolean('top_job')->default(0);
+
             $table->date('last_date');
             $table->integer('views')->unsigned();
             $table->integer('openings')->unsigned();
@@ -38,6 +40,9 @@ class CreateJobsTable extends Migration
 
             $table->foreign('employer_id', 'emp_id_fk')->references('id')->on('employers');
             $table->foreign('skill_id', 'skill_id_fk')->references('id')->on('skills');
+            
+            $table->foreign('location_id', 'location_id_fk')->references('id')->on('locations');
+            $table->foreign('industries_id', 'industries_id_fk')->references('id')->on('industriess');
         });
     }
 
