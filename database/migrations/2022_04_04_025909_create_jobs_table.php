@@ -42,7 +42,7 @@ class CreateJobsTable extends Migration
             $table->foreign('skill_id', 'skill_id_fk')->references('id')->on('skills');
             
             $table->foreign('location_id', 'location_id_fk')->references('id')->on('locations');
-            $table->foreign('industries_id', 'industries_id_fk')->references('id')->on('industriess');
+            $table->foreign('industries_id', 'industries_id_fk')->references('id')->on('industries');
         });
     }
 
