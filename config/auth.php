@@ -18,6 +18,20 @@ return [
         'passwords' => 'users',
     ],
 
+    'admin' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
+    
+    'jobseeker' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Jobseeker::class,
+    ],
+
+    'employer' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Employer::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -40,6 +54,22 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        
+        'jobseeker' => [
+            'driver' => 'session',
+            'provider' => 'jobseekers',
+        ],
+        
+        'employer' => [
+            'driver' => 'session',
+            'provider' => 'employers',
+        ],
+
     ],
 
     /*
@@ -64,7 +94,19 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'admins'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Admin::class,
+         ],
+        'jobseekers'=> [
+            'driver'=>'eloquent',
+            'model'=>App\Models\Jobseeker::class,
+        ],
+        'employers'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Employer::class,
+        ],
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -92,6 +134,18 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Admin::class,
+        ],
+        'employers'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Employer::class,
+        ],
+        'jobseekers'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Jobseeker::class,
         ],
     ],
 
