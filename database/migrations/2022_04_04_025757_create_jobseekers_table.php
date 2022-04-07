@@ -19,7 +19,7 @@ class CreateJobseekersTable extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->text('content')->nullable();
-            $table->string('slug');
+            
             $table->string('phone_no')->nullable();
             $table->string('current_address')->nullable();
             $table->string('permanent_address')->nullable();
@@ -32,9 +32,9 @@ class CreateJobseekersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('token')->unique();
-            $table->dateTime('token_expiry');
-            $table->dateTime('last_logged_in')->nullable();
+            $table->string('token')->unique()->nullable();
+            $table->dateTime('token_expiry')->nullable();
+            $table->timestamp('last_logged_in')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

@@ -42,6 +42,9 @@
                      <div class="form-group">
                          <button type="submit" class="btn btn-primary">Login</button>
                      </div>
+<p>
+                     <a href="{{ route('admin.register') }}">Create new Account</a>
+</p>
                  </form>
             </div>
         </div>

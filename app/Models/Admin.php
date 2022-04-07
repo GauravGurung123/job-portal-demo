@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+
 use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,13 +17,16 @@ class Admin extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
+
         'name',
         'username',
-        'slug',
         'email',
         'profile_photo_path',
         'password',
+        'token',
+        'token_expiry',
+        'last_logged_in',
+        'status',
     ];
 
     /**
@@ -33,7 +36,7 @@ class Admin extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'token',
     ];
 
     /**
@@ -44,4 +47,10 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
 }

@@ -30,9 +30,12 @@ class Jobseeker extends Authenticatable
         'status',
         'social_links',
         'profile_photo_path',
-        'slug',
+        
         'email',
         'password',
+        'token',
+        'token_expiry',
+        'last_logged_in',
     ];
 
     /**
@@ -42,6 +45,7 @@ class Jobseeker extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'token',
         'remember_token',
     ];
 

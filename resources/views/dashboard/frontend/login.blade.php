@@ -44,7 +44,7 @@
                          <button type="submit" class="btn btn-primary">Login</button>
                      </div>
                      <br>
-                     {{-- <a href="{{ route('frontend.register') }}">Create new Account</a> --}}
+                     <a href="{{ route('employer.register') }}">Create new Account</a>
                  </form>
             </div>
         </div>
@@ -74,7 +74,7 @@
                          <button type="submit" class="btn btn-primary">Login</button>
                      </div>
                      <br>
-                     {{-- <a href="{{ route('frontend.register') }}">Create new Account</a> --}}
+                     <a href="{{ route('jobseeker.register') }}">Create new Account</a>
                  </form>
             </div>
         </div>

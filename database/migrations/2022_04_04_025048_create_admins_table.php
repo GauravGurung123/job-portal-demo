@@ -18,13 +18,14 @@ class CreateAdminsTable extends Migration
             
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('slug');
+         
             $table->text('profile_photo_path')->nullable();
             $table->string('email')->unique();
+            $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('token')->unique();
-            $table->dateTime('token_expiry');
-            $table->dateTime('last_logged_in')->nullable();
+            $table->string('token')->unique()->nullable();
+            $table->dateTime('token_expiry')->nullable();
+            $table->timestamp('last_logged_in')->nullable();
             $table->string('status')->nullable();
 
             $table->timestamps();
