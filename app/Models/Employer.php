@@ -17,7 +17,7 @@ class Employer extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
+
         'industry_id',
         'location_id',
         'username',
@@ -96,15 +96,6 @@ class Employer extends Authenticatable
     {
         return $this->hasMany('App\Models\Job', 'employer_id', 'id');
     }
-    
-    /**
-     * employer role
-     *
-     * @return void
-     */
-    public function role()
-    {
-        return $this->hasOne('App\Models\Role');
-    }
+
 
 }

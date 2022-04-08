@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\EmployerLoginController;
 use App\Http\Controllers\Frontend\Auth\JobseekerLoginController;
+use App\Http\Controllers\Frontend\Employer\EmployerController;
 use App\Http\Controllers\Frontend\Jobseeker\JobseekerController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,7 +63,7 @@ Route::group([
 ], function () {
     Route::get('/login', [EmployerLoginController::class, 'show'])->name('login');
     Route::post('/login', [EmployerLoginController::class, 'loginProcess'])->name('login-process');
-    Route::view('/register', 'dashboard.frontend.register')->name('register');
+    Route::get('/register', [EmployerController::class, 'registerForm'])->name('register');
 
     Route::middleware(['auth:employer'])->group(function () {
         Route::view('/home', 'dashboard.frontend.employer-home')->name('home');

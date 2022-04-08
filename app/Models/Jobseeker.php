@@ -17,7 +17,6 @@ class Jobseeker extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
         'username',
         'name',
         'content',
@@ -61,11 +60,6 @@ class Jobseeker extends Authenticatable
     public function skills()
     {
         return $this->morphMany('App\Models\Skill', 'skillable');
-    }
-
-    public function role()
-    {
-        return $this->hasOne('App\Models\Role');
     }
 
     public function resume()

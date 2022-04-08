@@ -53,7 +53,7 @@
                         <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                     </div>
                     <div class="form-group">
-                        <label for="image">Upload Image</label>
+                        <label for="image">Upload Profile Picture</label>
                         <input type="file" class="form-control" name="image" value="{{ old('image') }}">
                         <span class="text-danger">@error('image'){{ $message }}@enderror</span>
                     </div>

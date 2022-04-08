@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\Employer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Industry;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class EmployerController extends Controller
@@ -22,9 +24,15 @@ class EmployerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function registerForm()
     {
-        //
+        // $industries = Industry::all();
+        // $locations = Location::all();
+        
+        return view('dashboard.frontend.register', [
+            'industries' => Industry::all(),
+            'locations' => Location::all(),
+        ]);
     }
 
     /**
