@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Employer;
+namespace App\Http\Controllers\Admin\Dashboard\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Industry;
-use App\Models\Location;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
-class EmployerController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,15 +24,9 @@ class EmployerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function registerForm()
+    public function create()
     {
-        // $industries = Industry::all();
-        // $locations = Location::all();
-        
-        return view('dashboard.frontend.register', [
-            'industries' => Industry::all(),
-            'locations' => Location::all(),
-        ]);
+        //
     }
 
     /**
@@ -63,9 +57,11 @@ class EmployerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($username)
     {
-        //
+        $admin = Admin::where('username', $username)->first();
+
+        return view('dashboard.admin.users.admin.edit_admin', compact('admin'));   
     }
 
     /**
@@ -77,7 +73,28 @@ class EmployerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'username' => ['required', Rule::unique('admins')->ignore($admin->id),],
+            'email' => 'required',Rule::unique('admins', 'email')->ignore($admin->id),            
+            'image' => ['nullable', 'mimes:jpg,png,jpeg', 'max:6048'],
+        ]);
+        
+        if(isset($request->image)) {
+            $imgName = time().$request->image->getClientOriginalName();
+            $request->image->move(public_path('images'), $imgName);
+            $validatedData['profile_photo_path'] = $imgName;
+        }else{
+            $validatedData['profile_photo_path'] = 'dummy.png';
+        }
+        
+
+        $admin->update($validatedData);
+
+        return redirect('admin/dashboard/users');
+
     }
 
     /**
@@ -88,6 +105,8 @@ class EmployerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
+        return redirect('admin/dashboard/users');
     }
 }

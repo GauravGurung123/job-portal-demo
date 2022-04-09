@@ -29,14 +29,14 @@ class LoginController extends Controller
 
          if( auth('admin')->attempt($creds) ){
 
-             return redirect()->route('admin.home');
+             return redirect()->route('admin.dashboard');
          }else{
              return redirect()->route('admin.login')->with('fail','Incorrect credentials');
          }
     }
 
     function logout(){
-        auth()->guard('admin')->logout();
+        auth()->guard()->logout();
         return redirect('/');
     }
 }

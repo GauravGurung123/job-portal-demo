@@ -23,7 +23,7 @@
         {{-- Admin register form --}}
         <div class="row">
             <div class="col-md-4 offset-md-4" style="margin-top: 45px">
-                 <h4>Employer Register</h4><hr>
+                 <h4>Admin Registeration Form</h4><hr>
                  <form action="{{ route('admin.create') }}" enctype="multipart/form-data" method="post">
                     @if (Session::get('success'))
                         <div class="alert alert-success">

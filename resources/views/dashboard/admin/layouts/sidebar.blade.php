@@ -18,7 +18,7 @@
                 <img src="{{ asset('vendor/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{Auth::user()->name}}</a>
             </div>
         </div>
 
@@ -42,14 +42,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="reports.php" class="nav-link">
+                            <a href="{{ route('admin.dashboard-users-list') }}" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>User Lists</p>
                             </a>
                         </li>
                         
                         <li class="nav-item">
-                            <a href="peer_appraisal.php" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Add User</p>
                             </a>
@@ -68,14 +68,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="reports.php" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Roles Lists</p>
                             </a>
                         </li>
                         
                         <li class="nav-item">
-                            <a href="peer_appraisal.php" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Role Config</p>
                             </a>
@@ -94,14 +94,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="reports.php" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Permissions Lists</p>
                             </a>
                         </li>
                         
                         <li class="nav-item">
-                            <a href="peer_appraisal.php" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Permission Config</p>
                             </a>
@@ -111,9 +111,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="includes/logout.php" class="nav-link">
+                    <a  href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
+                        <form action="{{ route('admin.logout') }}" id="logout-form" method="post">@csrf</form>
                     </a>
                 </li>
             </ul>

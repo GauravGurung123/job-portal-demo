@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Jobseeker;
+namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Jobseeker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class JobseekerController extends Controller
+class JobseekerRegisterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
+    public function __construct()
+    {
+        $this->middleware('auth:jobseeker', ['only'=>['edit','update','delete']]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +21,7 @@ class JobseekerController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.frontend.jobseeker.register');
     }
 
     /**
@@ -48,18 +43,18 @@ class JobseekerController extends Controller
 
         ]);
 
-        // if(isset($request->image)) {
-        //     $imgName = $request->image->getClientOriginalName().time();
-        //     $request->image->move(public_path('images'), $imgName);
-        // }else{
-        //     $imgName='dummy.png';
-        // }
+        if(isset($request->image)) {
+            $imgName = $request->image->getClientOriginalName().time();
+            $request->image->move(public_path('images'), $imgName);
+        }else{
+            $imgName='dummy.png';
+        }
         $validated = array_replace
         (
             $validated,
             [
                 'password' => Hash::make($request->password),
-                // 'image' => $imgName,
+                'profile_photo_path' => $imgName,
             ]
         );
 
@@ -67,7 +62,7 @@ class JobseekerController extends Controller
         
         Jobseeker::create($validated);
 
-        return redirect('/jobseeker/login');
+        return redirect('/');
     }
 
     /**

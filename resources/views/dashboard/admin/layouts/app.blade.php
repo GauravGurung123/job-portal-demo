@@ -43,7 +43,11 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
+            <section class="content">
+              <div class="container-fluid">
             @yield('content-main')
+              </div>
+            </section>
             <!-- /.Main content -->
 
         </div>
@@ -94,5 +98,7 @@
 {{-- <script src="{{ asset('vendor/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('vendor/dist/js/pages/dashboard.js')}}"></script>
+<!-- font awesome icon -->
+<script src="https://use.fontawesome.com/c4f7173640.js"></script>
 </body>
 </html>
