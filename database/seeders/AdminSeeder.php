@@ -19,11 +19,10 @@ class AdminSeeder extends Seeder
         Admin::create([
             'name' => 'Admin',
             'username' => 'admin',
-            // 'slug' => 'admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'token' => Str::random(64),
+            // 'token' => Str::random(64),
             'status' => 'Active',
         ]);
     

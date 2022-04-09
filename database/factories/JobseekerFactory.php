@@ -17,10 +17,8 @@ class JobseekerFactory extends Factory
     {
         
         return [
-            'role_id' => 2,
             'name' => $this->faker->name(),
             'username' => $this->faker->unique()->userName(),
-            'slug' => $this->faker->slug(),
             'content' => $this->faker->sentence(),
             'phone_no' => $this->faker->phoneNumber(),
             'current_address' => $this->faker->city(),
@@ -36,6 +34,7 @@ class JobseekerFactory extends Factory
             // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'profile_photo_path' => $this->faker->imageUrl(400, 240),
+            'last_logged_in' => $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = '2022-5-27', $timezone = 'Asia/Kathmandu'),
             'created_at' => $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = '2022-5-27', $timezone = 'Asia/Kathmandu'),
             'updated_at' => $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = '2022-5-27', $timezone = 'Asia/Kathmandu'),
 

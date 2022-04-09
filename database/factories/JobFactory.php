@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Employer;
+use App\Models\Industry;
+use App\Models\Location;
 use App\Models\Skill;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,6 +20,8 @@ class JobFactory extends Factory
         return [
             'employer_id' => Employer::all()->random()->id,
             'skill_id' => Skill::all()->random()->id,
+            'Location_id' => Location::all()->random()->id,
+            'industry_id' => Industry::all()->random()->id,
             'title' => $this->faker->unique()->jobTitle(),
             'application_email' => $this->faker->unique()->companyEmail(),
             'application_url' => $this->faker->url(),
@@ -30,7 +34,6 @@ class JobFactory extends Factory
             'max_salary' => $this->faker->numberBetween(30000, 5000000),
             'status' => $this->faker->randomElement(['Active', 'Pending', 'Rejected', 'Expired']),
             'featured' => rand(0, 1),
-            'top_job' => rand(0, 1),
             'last_date' => $this->faker->date('Y-m-d', '2022-5-27'),
             'views' => $this->faker->numberBetween(1,10),
             'openings' => $this->faker->numberBetween(1,10),

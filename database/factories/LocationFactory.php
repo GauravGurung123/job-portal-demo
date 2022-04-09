@@ -16,7 +16,7 @@ class LocationFactory extends Factory
         return [
             'name' => $this->faker->city(),
             'slug' => $this->faker->slug(),
-
+            'created_at'=> $this->faker->dateTime(),
         ];
     }
 }

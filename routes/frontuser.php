@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Admin\Dashboard\User\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\Dashboard\RolePermission\PermissionController;
+use App\Http\Controllers\Admin\Dashboard\RolePermission\RoleController;
 use App\Http\Controllers\Admin\Dashboard\User\EmployerController;
 use App\Http\Controllers\Admin\Dashboard\User\JobseekerController;
 use App\Http\Controllers\Admin\Dashboard\UserController;
@@ -38,6 +40,8 @@ Route::group([
         Route::resource('usr-a', AdminController::class);
         Route::resource('usr-e', EmployerController::class);
         Route::resource('usr-j', JobseekerController::class);
+        Route::resource('roles', RoleController::class);
+        Route::resource('permissions', PermissionController::class);
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/dashboard/users', [UserController::class, 'userList'])->name('dashboard-users-list');
         Route::get('/{username}', [AdminDashboardController::class, 'show'])->name('profile');

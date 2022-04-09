@@ -37,8 +37,8 @@ class RegisterController extends Controller
 
         // dd($validated);
         
-        Admin::create($validated);
-
+        $admin = Admin::create($validated);
+        $admin->assignRole('admin');
         return redirect('/admin/login');
     }
 

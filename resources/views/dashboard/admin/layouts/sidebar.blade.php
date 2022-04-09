@@ -59,7 +59,7 @@
                 </li>  
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-drafting-compass"></i>
                         <p>
                         Roles
@@ -68,7 +68,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.roles.index')}}" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Roles Lists</p>
                             </a>
@@ -85,7 +85,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
                         Permissions
@@ -94,7 +94,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.permissions.index')}}" class="nav-link">
                                 <i class="fas fa-chevron-right nav-icon"></i>
                                 <p>Permissions Lists</p>
                             </a>

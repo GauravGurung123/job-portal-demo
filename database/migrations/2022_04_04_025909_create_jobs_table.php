@@ -18,7 +18,7 @@ class CreateJobsTable extends Migration
             $table->bigInteger('employer_id')->unsigned();       
             $table->bigInteger('skill_id')->unsigned();  
             $table->bigInteger('location_id')->unsigned();       
-            $table->bigInteger('industries_id')->unsigned();       
+            $table->bigInteger('industry_id')->unsigned();       
             $table->string('title');
             $table->string('application_email')->nullable();
             $table->string('application_url')->nullable();
@@ -42,7 +42,7 @@ class CreateJobsTable extends Migration
             $table->foreign('skill_id', 'skill_id_fk')->references('id')->on('skills');
             
             $table->foreign('location_id', 'location_id_fk')->references('id')->on('locations');
-            $table->foreign('industries_id', 'industries_id_fk')->references('id')->on('industries');
+            $table->foreign('industry_id', 'industry_id_fk')->references('id')->on('industries');
         });
     }
 
