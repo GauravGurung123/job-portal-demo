@@ -41,10 +41,10 @@
 
                             <td class="d-flex">
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-outline-info m-1">
+                                    <a href="{{route('admin.permissions.edit', $permission->id)}}" class="btn btn-outline-info m-1">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <form action="#" method="POST" >
+                                    <form action="{{route('admin.permissions.destroy', $permission->id)}}" method="POST" >
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
@@ -58,10 +58,10 @@
                             <tr> 
                             </tr>
                             
-                    @can('create-roles')        
-                        <a href="{{ route('admin.roles.create') }}" class="btn btn-success mb-5">
-                            <i class="fa fa-plus"></i> Add New Role</a>
-                    @endcan      
+                    {{-- @can('create-roles')         --}}
+                        <a href="{{ route('admin.permissions.create') }}" class="btn btn-success mb-5">
+                            <i class="fa fa-plus"></i> Add New Permission</a>
+                    {{-- @endcan       --}}
                     </tfoot>
                         </table>
                     </div>

@@ -26,7 +26,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.permissions.add-new');
     }
 
     /**
@@ -37,7 +37,12 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Permission::create([
+            'name' => $request->name
+        ]);
+        
+        return redirect()->route('admin.permissions.index');
+
     }
 
     /**
@@ -59,7 +64,10 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+            
+        $permission=Permission::where('id',$id)->firstOrFail();
+        return view('dashboard.admin.permissions.edit', compact('permission'));
+
     }
 
     /**
@@ -71,7 +79,13 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $permissions=Permission::find($id);
+        $permissions->update([   
+            'name' => $request->name    
+        ]);
+        
+        return redirect()->route('admin.permissions.index');
     }
 
     /**
@@ -82,6 +96,7 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Permission::where('id',$id)->first()->delete();
+        return redirect()->back()->withSuccess('Your Permission has been Deleted');
     }
 }
