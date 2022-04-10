@@ -15,5 +15,6 @@ class EmployerSeeder extends Seeder
     public function run()
     {
         Employer::factory(10)->create();
+        $this->command->info('Inserted '.count(Employer::all()).' employer records.');
     }
 }

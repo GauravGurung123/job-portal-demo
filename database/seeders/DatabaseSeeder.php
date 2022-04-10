@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,20 +14,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        // DB::table('roles')->truncate();
+        // DB::table('permissions')->truncate();
+        // DB::table('role_has_permissions')->truncate();
+        
         $this->call(
             [
-                
-                // IndustrySeeder::class,
-                // LocationSeeder::class,
-                // SkillSeeder::class,
-                // AdminSeeder::class,
-                // JobseekerSeeder::class,
-                // EmployerSeeder::class,
-                // Jobseeder::class,
-                // JobApplicationSeeder::class,
-                // JobseekerFavoriteSeeder::class,
-                // ResumeSeeder::class,
-                PermissionSeeder::class,
+                IndustrySeeder::class,
+                LocationSeeder::class,
+                SkillSeeder::class,
+                AdminSeeder::class,
+                JobseekerSeeder::class,
+                EmployerSeeder::class,
+                JobSeeder::class,
+                JobApplicationSeeder::class,
+                JobseekerFavoriteSeeder::class,
+                ResumeSeeder::class,
+                // PermissionSeeder::class,
             ]
             );
     }

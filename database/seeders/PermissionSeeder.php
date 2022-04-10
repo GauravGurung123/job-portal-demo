@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
         'delete-',
     ];
     /**
-     * Permission slugs
+     * Admin Permission slugs
      */
     protected $permissionSlugs=[
         'admins',
@@ -33,28 +33,65 @@ class PermissionSeeder extends Seeder
         'skills'
         
     ];
+    
+    /**
+     * Jobseeker permissionSlugs
+     *
+     * @var array
+     */
+    protected $jobseekerPermissionSlugs=[
+        'jobs',
+        'skills'
+    ];
+    
+    /**
+     * Employer permissionSlugs
+     *
+     * @var array
+     */
+    protected $employerPermissionSlugs=[
+        'jobs',
+        'locations',
+        'industries',
+        'skills'
+    ];
     /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run()
-    {
-        $role = Role::create(['name' => 'admin']);
+    {       
+        // create roles and assign created permissions
+        $admin = Role::create(['name' => 'admin']);
         foreach ($this->permissionSlugs as $slug){
             foreach($this->crudList as $index => $crud){
-                $result = DB::table('permissions')->insert(['name'=>$crud.$slug,'guard_name'=>'web']);
+                $result = DB::table('permissions')->insert(['name'=>$crud.$slug,'guard_name'=>'admin']);
                 if (!$result) {
                     $this->command->info("Insert failed at record $index.");
                     return;
                 }
-                $role->givePermissionTo($crud.$slug);
+                $admin->givePermissionTo($crud.$slug);
             }
         }
-        $this->command->info('Inserted '.count($this->crudList)*count($this->permissionSlugs).' records.');
+        $this->command->info('Inserted '.count($this->crudList)*count($this->permissionSlugs).' admin permission records.');
 
-        // create roles and assign created permissions
-        Role::create(['name' => 'jobseeker']);
-        Role::create(['name' => 'employer']);
+        $jobseeker = Role::create(['name' => 'jobseeker']);
+        foreach ($this->jobseekerPermissionSlugs as $jSlug){
+            foreach($this->crudList as $index => $crud){
+                $jobseeker->givePermissionTo($crud.$jSlug);
+            }
+        }
+        $this->command->info('Inserted '.count($this->crudList)*count($this->jobseekerPermissionSlugs).' jobseeker permission records.');
+
+        $employer = Role::create(['name' => 'employer']);
+        foreach ($this->employerPermissionSlugs as $eSlug){
+            foreach($this->crudList as $index => $crud){                
+                $employer->givePermissionTo($crud.$eSlug);
+            }
+        }
+        $this->command->info('Inserted '.count($this->crudList)*count($this->employerPermissionSlugs).' employer permission records.');
+
+
     }
 }

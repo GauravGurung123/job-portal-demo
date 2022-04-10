@@ -15,5 +15,6 @@ class JobseekerFavoriteSeeder extends Seeder
     public function run()
     {
         JobseekerFavorite::factory(10)->create();
+        $this->command->info('Inserted '.count(JobseekerFavorite::all()).' jobseeker favorite records.');
     }
 }

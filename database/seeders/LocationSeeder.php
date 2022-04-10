@@ -15,5 +15,6 @@ class LocationSeeder extends Seeder
     public function run()
     {
         Location::factory(5)->create();
+        $this->command->info('Inserted '.count(Location::all()).' location records.');
     }
 }

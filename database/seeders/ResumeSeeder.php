@@ -15,5 +15,6 @@ class ResumeSeeder extends Seeder
     public function run()
     {
         Resume::factory(10)->create();
+        $this->command->info('Inserted '.count(Resume::all()).' resume records.');
     }
 }

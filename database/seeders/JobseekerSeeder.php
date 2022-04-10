@@ -15,5 +15,6 @@ class JobseekerSeeder extends Seeder
     public function run()
     {
         Jobseeker::factory(10)->create();
+        $this->command->info('Inserted '.count(Jobseeker::all()).' jobseeker records.');
     }
 }

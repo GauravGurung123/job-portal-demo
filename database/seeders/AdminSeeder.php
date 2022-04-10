@@ -25,6 +25,6 @@ class AdminSeeder extends Seeder
             // 'token' => Str::random(64),
             'status' => 'Active',
         ]);
-    
+        $this->command->info('Inserted '.count(Admin::all()).' admin records.');
     }
 }

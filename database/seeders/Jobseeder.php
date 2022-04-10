@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Job;
 use Illuminate\Database\Seeder;
 
-class Jobseeder extends Seeder
+class JobSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,5 +15,7 @@ class Jobseeder extends Seeder
     public function run()
     {
         Job::factory(10)->create();
+        $this->command->info('Inserted '.count(Job::all()).' job records.');
+
     }
 }

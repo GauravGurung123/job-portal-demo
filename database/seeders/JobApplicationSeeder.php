@@ -15,5 +15,7 @@ class JobApplicationSeeder extends Seeder
     public function run()
     {
         JobApplication::factory(10)->create();
+        $this->command->info('Inserted '.count(JobApplication::all()).' job application records.');
+    
     }
 }

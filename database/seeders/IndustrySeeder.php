@@ -23,5 +23,7 @@ class IndustrySeeder extends Seeder
         ];
 
         Industry::insert($industries);
+        $this->command->info('Inserted '.count(Industry::all()).' industry records.');
+
     }
 }
