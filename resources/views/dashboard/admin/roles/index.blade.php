@@ -37,7 +37,7 @@
                             @foreach($roles as $role)
                             <tr>
                             <td>{{$role->name}}</td>
-                            <td>21</td>
+                            <td>21({{$adminCount}})</td>
 
                             <td class="d-flex">
                                 <div class="btn-group">

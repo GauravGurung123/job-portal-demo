@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\Dashboard\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -108,5 +110,20 @@ class AdminController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->delete();
         return redirect('admin/dashboard/users');
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        $admin = Admin::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required','min:4'],
+            'new_cpassword' => ['same:new_password'],
+        ]);
+
+        $admin->update(['password'=>Hash::make($request->new_password)]);
+
+        return redirect()->back()->with(['success' => 'Password Changed']);
     }
 }

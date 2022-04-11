@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
                 JobApplicationSeeder::class,
                 JobseekerFavoriteSeeder::class,
                 ResumeSeeder::class,
-                // PermissionSeeder::class,
+                PermissionSeeder::class,
+                ModelHasRoleSeeder::class,
             ]
             );
     }

@@ -20,7 +20,7 @@ class LoginController extends Controller
     function loginProcess(Request $request){
          $request->validate([
             'email'=>'required|email|exists:admins,email',
-            'password'=>'required|min:5|max:30'
+            'password'=>'required|min:4|max:30'
          ],[
              'email.exists'=>'This email is not exists in admins table'
          ]);

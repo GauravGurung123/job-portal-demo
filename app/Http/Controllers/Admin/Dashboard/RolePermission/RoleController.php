@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Dashboard\RolePermission;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Employer;
+use App\Models\Jobseeker;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -17,8 +20,9 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
+        $adminCount = Admin::role('admin')->get()->count();
         // $adminRole = Role::   
-        return view('dashboard.admin.roles.index', compact('roles'));    
+        return view('dashboard.admin.roles.index', compact(['roles', 'adminCount']));    
     }
 
     /**

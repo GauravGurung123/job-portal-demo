@@ -1,5 +1,4 @@
 @extends('dashboard.admin.layouts.app')
-
 @section('content-header')
 <div class="content-header">
     <div class="container-fluid">
@@ -10,6 +9,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard-users-list') }}">User List</a></li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -18,62 +18,73 @@
 @endsection
 
 @section('content-main')
-{{-- Edit Profile form --}}
-<div class="row">
-    <div class="col-md-6 offset-md-3" style="margin-top: 45px">            
-        <form action="{{route('admin.usr-a.update',['usr_a' => $admin->id])}}" enctype="multipart/form-data" method="POST">
-        @method('PUT')
-        @if (Session::get('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
-        @if (Session::get('fail'))
-        <div class="alert alert-danger">
-            {{ Session::get('fail') }}
-        </div>
-        @endif
-
-        @csrf
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" class="form-control" name="name" value="{{ old('name') ?? $admin->name}}">
-                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
-            </div>
-            <div class="form-group">
-            <label for="username">UserName</label>
-            <input type="text" class="form-control" name="username" value="{{ old('username') ?? $admin->username }}">
-            <span class="text-danger">@error('username'){{ $message }}@enderror</span>
-        </div>
-            <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" value="{{ old('email') ?? $admin->email }}">
-            <span class="text-danger">@error('email'){{ $message }}@enderror</span>
-        </div>
-        <div class="form-group">
-            <label for="image">Upload Profile Picture</label>
-            <input type="file" class="form-control" name="image" value="{{ old('image') }}">
-            <span class="text-danger">@error('image'){{ $message }}@enderror</span>
+  <!-- START card-->
+  <div class="card card-primary card-outline card-outline-tabs">
+    <div class="card-header p-0 border-bottom-0" style="background-color: #e8e8f7;">
+        <ul class="nav nav-tabs h5" id="custom-tabs-four-tab" role="tablist">
+            <li class="nav-item box" style="">
+            <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="true">Profile</a>
+            </li>
+            <li class="nav-item box" style="">
+            <a class="nav-link" id="custom-tabs-four-password-tab" data-toggle="pill" href="#custom-tabs-four-password" role="tab" aria-controls="custom-tabs-four-password" aria-selected="false">Password</a>
+            </li>
+            <li class="nav-item box" style="">
+            <a class="nav-link" id="custom-tabs-four-role-tab" data-toggle="pill" href="#custom-tabs-four-role" role="tab" aria-controls="custom-tabs-four-role" aria-selected="false">Role</a>
+            </li>
             
-        </div>
-        {{-- <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Enter password" value="{{ old('password') }}">
-            <span class="text-danger">@error('password'){{ $message }}@enderror</span>
-        </div>
-        <div class="form-group">
-            <label for="cpassword">Confirm Password</label>
-            <input type="password" class="form-control" name="cpassword" placeholder="Enter confirm password" value="{{ old('cpassword') }}">
-            <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
-        </div> --}}
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-            <br>
-            
-        </form>
+        </ul>
     </div>
-    {{-- <img src="{{ asset('images/'.$admin['profile_photo_path']) }}" height="34px" width="44px" alt="no image"> --}}
-    
+    <!-- card-header ended -->
+    <div class="card-body">
+        <div class="tab-content" id="custom-tabs-four-tabContent">
+            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                {{-- Edit Profile form --}}
+              @include('dashboard.admin.users.admin.includes.profile')
+
+            </div>
+            <div class="tab-pane fade show active" id="custom-tabs-four-password" role="tabpanel" aria-labelledby="custom-tabs-four-password-tab">
+              @include('dashboard.admin.users.admin.includes.change_password')
+              
+          </div>
+          <div class="tab-pane fade" id="custom-tabs-four-role" role="tabpanel" aria-labelledby="custom-tabs-four-role-tab">
+            
+          </div>
+            
+        </div>
+    </div>
+    <!-- /.card-body ended -->
 </div>
+<!-- card card-primary ended -->
 @endsection
+<style>
+    li.box{
+        border: 2px solid;
+        font-size: 1rem;
+        border-color: #ffffff;
+    }
+    
+    .nav-tabs .nav-link.active{
+        transform: translateY(-8%);
+        font-size: 1.2rem;
+        transition: 0.1s ease-in-out;
+        background-color: #6259ca;
+        color: #000000 !important;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+</style>
+<script>
+  
+    $(function() {
+  
+    $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+      localStorage.setItem('lastTab', $(this).attr('href'));
+    });
+    var lastTab = localStorage.getItem('lastTab');
+    
+    if (lastTab) {
+      $('[href="' + lastTab + '"]').tab('show');
+    }
+      
+    });
+  
+  </script>
