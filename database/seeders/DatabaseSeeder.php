@@ -33,7 +33,9 @@ class DatabaseSeeder extends Seeder
                 ResumeSeeder::class,
                 PermissionSeeder::class,
                 ModelHasRoleSeeder::class,
+                ModelHasPermissionSeeder::class,
             ]
             );
     }
+
 }

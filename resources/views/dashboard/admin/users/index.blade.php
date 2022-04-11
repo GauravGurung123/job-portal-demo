@@ -19,6 +19,7 @@
 
 @section('content-main')
 {{-- Admins Table --}}
+@can('view-admins')
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -61,16 +62,20 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
+                                    @can('update-admins')                                        
                                     <a href="{{route('admin.usr-a.edit',['usr_a' => $admin->username])}}" class="btn btn-outline-info m-1">
                                         <i class="fa fa-pencil"></i>
                                     </a>
+                                    @endcan
+                                    @can('delete-admins')                                        
                                     <form action="{{ route('admin.usr-a.destroy',['usr_a' => $admin->id ]) }}" method="POST" >
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
                                         </button>
                                     </form>
-                                </div>
+                                    @endcan
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -85,8 +90,10 @@
         </div>
     </div>
 </div>  
+@endcan
 
 {{-- Employers Table --}}
+@can('view-employers')  
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -129,16 +136,20 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                    <a href="{{route('admin.usr-e.edit',['usr_e' => $employer->username])}}" class="btn btn-outline-info m-1">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <form action="{{route('admin.usr-e.destroy',['usr_e' => $employer->id])}}" method="POST" >
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
-                                        </button>
-                                    </form>
-                                </div>
+                                        @can('update-employers')                                            
+                                        <a href="{{route('admin.usr-e.edit',['usr_e' => $employer->username])}}" class="btn btn-outline-info m-1">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        @endcan
+                                        @can('delete-employers')                        
+                                        <form action="{{route('admin.usr-e.destroy',['usr_e' => $employer->id])}}" method="POST" >
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
+                                            </button>
+                                        </form>
+                                        @endcan
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -150,11 +161,13 @@
                 </table>
             </div>
 
-        </div>
+        </div>  
     </div>
-</div>  
+</div>
+@endcan
 
 {{-- Jobseekers Table --}}
+@can('view-jobseekers')
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -197,15 +210,19 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                    <a href="{{route('admin.usr-j.edit',['usr_j' => $jobseeker->username])}}" class="btn btn-outline-info m-1">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('admin.usr-j.destroy',['usr_j' => $jobseeker->id ]) }}" method="POST" >
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
-                                        </button>
-                                    </form>
+                                        @can('edit-jobseekers')                                
+                                        <a href="{{route('admin.usr-j.edit',['usr_j' => $jobseeker->username])}}" class="btn btn-outline-info m-1">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        @endcan
+                                        @can('delete-jobseekers')
+                                        <form action="{{ route('admin.usr-j.destroy',['usr_j' => $jobseeker->id ]) }}" method="POST" >
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
+                                            </button>
+                                        </form>
+                                        @endcan
                                 </div>
                                 </td>
                             </tr>
@@ -221,4 +238,6 @@
         </div>
     </div>
 </div> 
+@endcan
+
 @endsection

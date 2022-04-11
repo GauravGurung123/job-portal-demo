@@ -22,6 +22,7 @@ class PermissionSeeder extends Seeder
      * Admin Permission slugs
      */
     protected $permissionSlugs=[
+        'users',
         'admins',
         'jobseekers',
         'employers',
@@ -66,7 +67,7 @@ class PermissionSeeder extends Seeder
         $admin = Role::create(['name' => 'admin']);
         foreach ($this->permissionSlugs as $slug){
             foreach($this->crudList as $index => $crud){
-                $result = DB::table('permissions')->insert(['name'=>$crud.$slug,'guard_name'=>'admin']);
+                $result = DB::table('permissions')->insert(['name'=>$crud.$slug,'guard_name'=>'web']);
                 if (!$result) {
                     $this->command->info("Insert failed at record $index.");
                     return;

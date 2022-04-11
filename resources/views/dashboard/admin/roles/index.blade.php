@@ -37,19 +37,25 @@
                             @foreach($roles as $role)
                             <tr>
                             <td>{{$role->name}}</td>
-                            <td>21({{$adminCount}})</td>
+                            {{-- <td>21({{dd($role)}})</td> --}}
+                            <td>21</td>
 
                             <td class="d-flex">
                                 <div class="btn-group">
-                                    <a href="{{route('admin.roles.edit', $role->id)}}" class="btn btn-outline-info m-1">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
+                                  @can('update-roles')
+                                  <a href="{{route('admin.roles.edit', $role->id)}}" class="btn btn-outline-info m-1">
+                                      <i class="fa fa-pencil"></i>
+                                  </a>
+                                  @endcan
+                                    @can('delete-roles')                                      
                                     <form action="{{route('admin.roles.destroy',['role'=> $role->id])}}" method="POST" >
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
                                         </button>
                                     </form>
+                                    @endcan
+                                </div>
                             </td>
                             </tr>
                             @endforeach
@@ -57,11 +63,11 @@
                             <tfoot>
                             <tr> 
                             </tr>
-                            
-                    {{-- @can('create-roles')         --}}
-                        <a href="{{ route('admin.roles.create') }}" class="btn btn-success mb-5">
-                            <i class="fa fa-plus"></i> Add New Role</a>
-                    {{-- @endcan       --}}
+
+                          @can('create-roles')                
+                          <a href="{{ route('admin.roles.create') }}" class="btn btn-success mb-5">
+                          <i class="fa fa-plus"></i> Add New Role</a>
+                          @endcan
                     </tfoot>
                         </table>
                     </div>

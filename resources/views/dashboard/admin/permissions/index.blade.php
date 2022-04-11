@@ -41,15 +41,20 @@
 
                             <td class="d-flex">
                                 <div class="btn-group">
-                                    <a href="{{route('admin.permissions.edit', $permission->id)}}" class="btn btn-outline-info m-1">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <form action="{{route('admin.permissions.destroy', $permission->id)}}" method="POST" >
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
-                                        </button>
-                                    </form>
+                                  @can('update-permissions')
+                                  <a href="{{route('admin.permissions.edit', $permission->id)}}" class="btn btn-outline-info m-1">
+                                      <i class="fa fa-pencil"></i>
+                                  </a>
+                                  @endcan
+                                  @can('delete-permissions')
+                                  <form action="{{route('admin.permissions.destroy', $permission->id)}}" method="POST" >
+                                      @method('DELETE')
+                                      @csrf
+                                      <button class="btn btn-outline-danger m-1"><i class="fa fa-trash"></i>&nbsp;Del
+                                      </button>
+                                  </form>
+                                  @endcan
+                                </div>
                             </td>
                             </tr>
                             @endforeach
@@ -58,10 +63,10 @@
                             <tr> 
                             </tr>
                             
-                    {{-- @can('create-roles')         --}}
+                    @can('create-permissions')        
                         <a href="{{ route('admin.permissions.create') }}" class="btn btn-success mb-5">
                             <i class="fa fa-plus"></i> Add New Permission</a>
-                    {{-- @endcan       --}}
+                    @endcan      
                     </tfoot>
                         </table>
                     </div>

@@ -30,8 +30,8 @@
                 role="menu"
                 data-accordion="false"
             >
-                <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+    
+                {{-- @can('view-users')                     --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-user"></i>
@@ -57,7 +57,9 @@
                 
                     </ul>
                 </li>  
+                {{-- @endcan --}}
 
+                @can('view-roles')                    
                 <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-drafting-compass"></i>
@@ -83,7 +85,9 @@
                         
                     </ul>
                 </li>
+                @endcan
 
+                @can('view-permissions')
                 <li class="nav-item">
                     <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -109,6 +113,7 @@
                         
                     </ul>
                 </li>
+                @endcan
 
                 <li class="nav-item">
                     <a  href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">

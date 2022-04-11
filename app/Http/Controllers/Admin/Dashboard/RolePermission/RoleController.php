@@ -12,6 +12,11 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {     
+        // $this->middleware('permission:create-roles|view-roles|update-roles|delete-roles', ['only' => ['index', 'show']]);
+   
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +25,10 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        $adminCount = Admin::role('admin')->get()->count();
+        // dd(auth()->user()->getRoleNames());
+        // $adminCount = Admin::role('admin')->get()->count();
         // $adminRole = Role::   
-        return view('dashboard.admin.roles.index', compact(['roles', 'adminCount']));    
+        return view('dashboard.admin.roles.index', compact(['roles']));    
     }
 
     /**
