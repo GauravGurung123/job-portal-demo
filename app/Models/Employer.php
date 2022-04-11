@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Employer extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
-    protected $guard_name = 'employer';
+    protected $guard_name = 'web';
     /**
      * The attributes that are mass assignable.
      *

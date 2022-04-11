@@ -29,7 +29,7 @@
                             <thead>
                             <tr>
                                 <th>Role Name</th>
-                                <th>Total user</th>
+                                <th>Users</th>
                                 <th>Action</th>
                           </tr>
                             </thead>
@@ -37,8 +37,18 @@
                             @foreach($roles as $role)
                             <tr>
                             <td>{{$role->name}}</td>
-                            {{-- <td>21({{dd($role)}})</td> --}}
-                            <td>21</td>
+                            
+                            {{-- {{dd($c->role('admin')->get('name'))}} --}}
+
+                            @if ($role->name == 'admin')                    
+                            <td>{{ $adminCount }}</td>
+                            @endif
+                            @if ($role->name == 'employer')
+                              <td>{{$empCount}}</td>
+                            @endif
+                            @if ($role->name == 'jobseeker')
+                              <td>{{$jskCount}}</td>
+                            @endif      
 
                             <td class="d-flex">
                                 <div class="btn-group">
