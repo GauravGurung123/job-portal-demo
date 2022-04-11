@@ -38,6 +38,8 @@ class CreateJobseekersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            $table->index(['name','username','email'], $name='fulltext_index_for_jobseekers');
+
         });
     }
 

@@ -30,6 +30,8 @@ class CreateAdminsTable extends Migration
 
             $table->timestamps();
 
+            $table->index(['name','username','email'], $name='fulltext_index_for_admins');
+
             
         });
     }

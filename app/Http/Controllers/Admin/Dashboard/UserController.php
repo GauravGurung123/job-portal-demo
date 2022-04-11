@@ -11,21 +11,43 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function userList()
+    public function userList(Request $request)
     {
-        $roles = Role::all();
-        $users = Admin::with('roles')->get();
+        $admin_search = $request['admin_search'] ?? null;
+        $employer_search = $request['employer_search'] ?? null;
+        $jobseeker_search = $request['jobseeker_search'] ?? null;
 
-        $admins = Admin::all();
-        $employers = Employer::all();
-        $jobseekers = Jobseeker::all();
+        if($admin_search != null){
+            $admins = Admin::whereRaw("MATCH(username, name, email) AGAINST(? IN BOOLEAN MODE)", [$admin_search])->get();
+        } else {
+            $admins = Admin::all();
+        }
+
+        if($employer_search != null){
+            $employers = Employer::whereRaw("MATCH(username, org_name, email) AGAINST(? IN BOOLEAN MODE)", [$employer_search])->get();
+        } else {        
+            $employers = Employer::all();
+        }
+        
+        if($jobseeker_search != null){            
+            $jobseekers = Admin::whereRaw("MATCH(name, username, email) AGAINST(? IN BOOLEAN MODE)", [$jobseeker_search])->get();
+            // where('username', 'like', "%$jobseeker_search%")->orWhere('name', 'like', "%$jobseeker_search%")->get(); 
+        } else {
+            $jobseekers = Jobseeker::all();
+        }
+        
+        $roles = Role::all();
+        // $users = Admin::with('roles')->get();
 
         return view('dashboard.admin.users.index', compact([
+            'admin_search',
+            'employer_search',
+            'jobseeker_search',
             'admins',
             'employers',
             'jobseekers',
             'roles',
-            'users',
+            // 'users',
         ]));  
     }
 }

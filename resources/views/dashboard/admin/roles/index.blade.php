@@ -42,14 +42,13 @@
 
                             @if ($role->name == 'admin')                    
                             <td>{{ $adminCount }}</td>
-                            @endif
-                            @if ($role->name == 'employer')
+                            @elseif ($role->name == 'employer')
                               <td>{{$empCount}}</td>
-                            @endif
-                            @if ($role->name == 'jobseeker')
+                            @elseif ($role->name == 'jobseeker')
                               <td>{{$jskCount}}</td>
-                            @endif      
-
+                            @else
+                            <td>0</td>      
+                            @endif
                             <td class="d-flex">
                                 <div class="btn-group">
                                   @can('update-roles')

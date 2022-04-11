@@ -26,14 +26,16 @@
             <div class="card-header">
                 <h3 class="card-title">All Admins</h3>
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
+                    <form action="">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                            <input type="text" name="admin_search" class="form-control float-right" placeholder="Search" value="{{$admin_search}}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             
@@ -100,14 +102,16 @@
             <div class="card-header">
                 <h3 class="card-title">All Employers</h3>
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
+                    <form action="">
+                        <div class="input-group input-group-sm" style="width: 100%;">
+                            <input type="text" name="employer_search" class="form-control float-right" placeholder="Search" value="{{$employer_search}}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             
@@ -174,14 +178,16 @@
             <div class="card-header">
                 <h3 class="card-title">All Jobseekers</h3>
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
+                    <form action="">
+                        <div class="input-group input-group-sm" style="width: 100%;">
+                        <input type="text" name="jobseeker_search" class="form-control float-right" placeholder="Search" value="{{$jobseeker_search}}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             
