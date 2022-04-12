@@ -27,8 +27,8 @@ class RoleController extends Controller
         $roles = Role::all();
         // dd(auth()->user()->getRoleNames());
         $adminCount = Admin::role('admin')->get()->count();
-        $empCount = Employer::role('employer')->get()->count();
-        $jskCount = Jobseeker::role('jobseeker')->get()->count();
+        $empCount = Admin::role('employer')->get()->count();
+        $jskCount = Admin::role('jobseeker')->get()->count();
         // $adminRole = Role::  
         return view('dashboard.admin.roles.index', compact(['roles', 'adminCount', 'empCount', 'jskCount']));    
     }

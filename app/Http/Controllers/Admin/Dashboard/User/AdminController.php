@@ -8,6 +8,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
@@ -62,11 +63,12 @@ class AdminController extends Controller
      */
     public function edit($username)
     {
-        $roles = Role::all();
+        $roles = Role::where('guard_name', 'admin')->get();
+        $permissions = Permission::where('guard_name', 'admin')->get();
         $admin = Admin::where('username', $username)->first();
         // $admin = Admin::where('username', $username)->first();
 
-        return view('dashboard.admin.users.admin.edit_admin', compact(['admin', 'roles']));   
+        return view('dashboard.admin.users.admin.edit_admin', compact(['admin', 'roles', 'permissions']));   
     }
 
     /**
@@ -119,7 +121,7 @@ class AdminController extends Controller
     {
         $admin = Admin::findOrFail($id);
 
-        $validatedData = $request->validate([
+        $request->validate([
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required','min:4'],
             'new_cpassword' => ['same:new_password'],
@@ -139,6 +141,19 @@ class AdminController extends Controller
         ]);
 
         $admin->syncRoles($request->name);
+
+        if (!$admin) {
+            return redirect()->back()->with(['fail-r' => 'Update Failed!']);            
+        }
+        return redirect()->back()->with(['success-r' => 'Role Changed Succesfuly']);
+
+    }
+    
+    public function changePermission(Request $request, $id)
+    {
+        $admin = Admin::findOrFail($id);
+        
+        $admin->syncPermissions($request->permission);
 
         if (!$admin) {
             return redirect()->back()->with(['fail-r' => 'Update Failed!']);            
