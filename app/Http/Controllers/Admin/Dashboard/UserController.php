@@ -18,9 +18,13 @@ class UserController extends Controller
         $jobseeker_search = $request['jobseeker_search'] ?? null;
 
         if($admin_search != null){
-            $admins = Admin::whereRaw("MATCH(username, name, email) AGAINST(? IN BOOLEAN MODE)", [$admin_search])->get();
-        } else {
-            $admins = Admin::all();
+            $admins = Admin::whereRaw("MATCH(username, name, email) AGAINST(? IN BOOLEAN MODE)", [$admin_search])->whereNotIn('name', ['super admin'])->get();
+        } else {            
+            if (auth()->user()->hasRole('super admin')){
+                $admins = Admin::all();
+            }else{
+                $admins = Admin::with('roles')->whereNotIn('name', ['super admin'])->get();            
+            }
         }
 
         if($employer_search != null){

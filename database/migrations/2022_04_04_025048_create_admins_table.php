@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateAdminsTable extends Migration
@@ -30,10 +31,9 @@ class CreateAdminsTable extends Migration
 
             $table->timestamps();
 
-            $table->index(['name','username','email'], $name='fulltext_index_for_admins');
-
-            
+            // $table->index(['name','username','email'], $name='fulltext_index_for_admins');
         });
+        DB::statement('ALTER TABLE admins ADD FULLTEXT fulltext_index_for_admins(name,username,email)');
     }
 
     /**

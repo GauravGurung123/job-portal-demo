@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateEmployersTable extends Migration
@@ -36,11 +37,13 @@ class CreateEmployersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->index(['username','org_name','email'], $name='fulltext_index_for_employers');
+            // $table->index(['username','org_name','email'], $name='fulltext_index_for_employers');
 
             $table->foreign('industry_id')->references('id')->on('industries');
             $table->foreign('location_id')->references('id')->on('locations');
         });
+        
+DB::statement('ALTER TABLE employers ADD FULLTEXT fulltext_index_for_employers(username,org_name,email)');
     }
 
     /**

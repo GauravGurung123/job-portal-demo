@@ -24,7 +24,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::whereNotIn('name', ['super admin'])->get();
         // dd(auth()->user()->getRoleNames());
         $adminCount = Admin::role('admin')->get()->count();
         $empCount = Admin::role('employer')->get()->count();

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateJobseekersTable extends Migration
@@ -38,9 +39,10 @@ class CreateJobseekersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->index(['name','username','email'], $name='fulltext_index_for_jobseekers');
-
+            // $table->index(['name','username','email'], $name='fulltext_index_for_jobseekers');
         });
+        
+DB::statement('ALTER TABLE jobseekers ADD FULLTEXT fulltext_index_for_jobseekers(name,username,email)');
     }
 
     /**

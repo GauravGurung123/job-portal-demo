@@ -63,7 +63,9 @@ class AdminController extends Controller
      */
     public function edit($username)
     {
-        $roles = Role::where('guard_name', 'admin')->get();
+        $roles = Role::where('guard_name', 'admin')
+        ->whereNotIn('name',['super admin'])->get();
+    
         $permissions = Permission::where('guard_name', 'admin')->get();
         $admin = Admin::where('username', $username)->first();
         // $admin = Admin::where('username', $username)->first();

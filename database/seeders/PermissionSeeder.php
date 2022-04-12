@@ -64,6 +64,8 @@ class PermissionSeeder extends Seeder
     public function run()
     {       
         // create roles and assign created permissions
+        $admin = Role::create(['name' => 'super admin']);
+        
         $admin = Role::create(['name' => 'admin']);
         foreach ($this->permissionSlugs as $slug){
             foreach($this->crudList as $index => $crud){

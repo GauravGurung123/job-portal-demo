@@ -17,6 +17,7 @@ class ModelHasRoleSeeder extends Seeder
     public function run()
     {
         Admin::findOrFail(1)->roles()->sync(1);
+        Admin::findOrFail(2)->roles()->sync(2);
         for ($i=1; $i < 11; $i++) { 
             Employer::findOrFail($i)->roles()->sync(2);
             Jobseeker::findOrFail($i)->roles()->sync(3);
