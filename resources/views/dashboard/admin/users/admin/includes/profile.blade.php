@@ -2,9 +2,9 @@
     <div class="col-md-6 offset-md-3">            
         <form action="{{route('admin.usr-a.update',['usr_a' => $admin->id])}}" enctype="multipart/form-data" method="POST">
         @method('PUT')
-        @if (Session::get('success'))
+        @if (Session::get('success-p'))
             <div class="alert alert-success">
-                {{ Session::get('success') }}
+                {{ Session::get('success-p') }}
             </div>
         @endif
         @if (Session::get('fail'))
@@ -35,20 +35,9 @@
             <span class="text-danger">@error('image'){{ $message }}@enderror</span>
             
         </div>
-        {{-- <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Enter password" value="{{ old('password') }}">
-            <span class="text-danger">@error('password'){{ $message }}@enderror</span>
-        </div>
         <div class="form-group">
-            <label for="cpassword">Confirm Password</label>
-            <input type="password" class="form-control" name="cpassword" placeholder="Enter confirm password" value="{{ old('cpassword') }}">
-            <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
-        </div> --}}
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-            <br>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
             
         </form>
     </div>

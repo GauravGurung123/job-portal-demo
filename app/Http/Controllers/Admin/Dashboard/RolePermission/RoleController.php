@@ -116,6 +116,6 @@ class RoleController extends Controller
     public function destroy($id)
     {
         Role::where('id',$id)->first()->delete();
-        return redirect()->back()->withSuccess('Your Role has been Deleted');
+            return redirect()->back()->withSuccess('Your Role has been Deleted');
     }
 }

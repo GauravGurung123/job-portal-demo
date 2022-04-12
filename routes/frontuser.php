@@ -42,6 +42,7 @@ Route::group([
     
     
     Route::middleware(['auth:admin'])->group(function () {
+        Route::patch('usr-a/change-role/{id}', [AdminController::class, 'changeRole'])->name('changeRole');
         Route::patch('usr-a/change-password/{id}', [AdminController::class, 'changePassword'])->name('changePwd');
         Route::resource('usr-a', AdminController::class);
         Route::resource('usr-e', EmployerController::class);

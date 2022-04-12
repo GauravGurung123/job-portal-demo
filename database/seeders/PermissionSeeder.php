@@ -67,7 +67,7 @@ class PermissionSeeder extends Seeder
         $admin = Role::create(['name' => 'admin']);
         foreach ($this->permissionSlugs as $slug){
             foreach($this->crudList as $index => $crud){
-                $result = DB::table('permissions')->insert(['name'=>$crud.$slug,'guard_name'=>'web']);
+                $result = DB::table('permissions')->insert(['name'=>$crud.$slug,'guard_name'=>'admin']);
                 if (!$result) {
                     $this->command->info("Insert failed at record $index.");
                     return;
@@ -80,6 +80,8 @@ class PermissionSeeder extends Seeder
         $jobseeker = Role::create(['name' => 'jobseeker']);
         foreach ($this->jobseekerPermissionSlugs as $jSlug){
             foreach($this->crudList as $index => $crud){
+                $result = DB::table('permissions')->insert(['name'=>$crud.$jSlug,'guard_name'=>'jobseeker']);
+
                 $jobseeker->givePermissionTo($crud.$jSlug);
             }
         }
@@ -88,6 +90,8 @@ class PermissionSeeder extends Seeder
         $employer = Role::create(['name' => 'employer']);
         foreach ($this->employerPermissionSlugs as $eSlug){
             foreach($this->crudList as $index => $crud){                
+                $result = DB::table('permissions')->insert(['name'=>$crud.$eSlug,'guard_name'=>'employer']);
+
                 $employer->givePermissionTo($crud.$eSlug);
             }
         }

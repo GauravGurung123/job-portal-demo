@@ -24,10 +24,10 @@
             <input type="password" class="form-control" name="new_cpassword" placeholder="confirm password" >
             <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
         </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-            <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+            
             
         </form>
     </div>

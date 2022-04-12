@@ -22,14 +22,17 @@
   <div class="card card-primary card-outline card-outline-tabs">
     <div class="card-header p-0 border-bottom-0" style="background-color: #e8e8f7;">
         <ul class="nav nav-tabs h5" id="custom-tabs-four-tab" role="tablist">
-            <li class="nav-item box" style="">
+            <li class="nav-item box">
             <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="true">Profile</a>
             </li>
-            <li class="nav-item box" style="">
+            <li class="nav-item box">
             <a class="nav-link" id="custom-tabs-four-password-tab" data-toggle="pill" href="#custom-tabs-four-password" role="tab" aria-controls="custom-tabs-four-password" aria-selected="false">Password</a>
             </li>
-            <li class="nav-item box" style="">
+            <li class="nav-item box">
             <a class="nav-link" id="custom-tabs-four-role-tab" data-toggle="pill" href="#custom-tabs-four-role" role="tab" aria-controls="custom-tabs-four-role" aria-selected="false">Role</a>
+            </li>
+            <li class="nav-item box">
+              <a class="nav-link" id="custom-tabs-four-role-permission" data-toggle="pill" href="#custom-tabs-four-permission" role="tab" aria-controls="custom-tabs-four-permission" aria-selected="false">Permission</a>
             </li>
             
         </ul>
@@ -37,19 +40,22 @@
     <!-- card-header ended -->
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-four-tabContent">
-            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                {{-- Edit Profile form --}}
+            <div class="tab-pane fade show active" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                {{-- Edit Profile tab --}}
               @include('dashboard.admin.users.admin.includes.profile')
-
             </div>
-            <div class="tab-pane fade show active" id="custom-tabs-four-password" role="tabpanel" aria-labelledby="custom-tabs-four-password-tab">
+            <div class="tab-pane fade" id="custom-tabs-four-password" role="tabpanel" aria-labelledby="custom-tabs-four-password-tab">
+              {{-- change password tab --}}
               @include('dashboard.admin.users.admin.includes.change_password')
-              
-          </div>
-          <div class="tab-pane fade" id="custom-tabs-four-role" role="tabpanel" aria-labelledby="custom-tabs-four-role-tab">
-            
-          </div>
-            
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-four-role" role="tabpanel" aria-labelledby="custom-tabs-four-role-tab">
+              {{-- Change Role tab --}}
+              @include('dashboard.admin.users.admin.includes.role')
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-four-permission" role="tabpanel" aria-labelledby="custom-tabs-four-permission-tab">
+              {{-- Change Permission tab --}}
+              @include('dashboard.admin.users.admin.includes.permission')
+            </div>
         </div>
     </div>
     <!-- /.card-body ended -->
@@ -72,8 +78,10 @@
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 </style>
-<script>
-  
+
+<!-- jQuery -->
+<script src="{{ asset('vendor/plugins/jquery/jquery.min.js')}}"></script>
+<script type="text/javascript">
     $(function() {
   
     $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {

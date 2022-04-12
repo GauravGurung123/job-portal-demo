@@ -8,6 +8,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -61,9 +62,11 @@ class AdminController extends Controller
      */
     public function edit($username)
     {
+        $roles = Role::all();
         $admin = Admin::where('username', $username)->first();
+        // $admin = Admin::where('username', $username)->first();
 
-        return view('dashboard.admin.users.admin.edit_admin', compact('admin'));   
+        return view('dashboard.admin.users.admin.edit_admin', compact(['admin', 'roles']));   
     }
 
     /**
@@ -94,9 +97,9 @@ class AdminController extends Controller
         
 
         $admin->update($validatedData);
-
-        return redirect('admin/dashboard/users');
-
+        if($admin){
+            return back()->with('success-p', 'Profile Updated Successfuly');
+        }
     }
 
     /**
@@ -126,4 +129,21 @@ class AdminController extends Controller
 
         return redirect()->back()->with(['success' => 'Password Changed']);
     }
-}
+
+    public function changeRole(Request $request, $id)
+    {
+        $admin = Admin::findOrFail($id);
+        
+        $request->validate([
+            'name' =>'required'
+        ]);
+
+        $admin->syncRoles($request->name);
+
+        if (!$admin) {
+            return redirect()->back()->with(['fail-r' => 'Update Failed!']);            
+        }
+        return redirect()->back()->with(['success-r' => 'Role Changed Succesfuly']);
+
+    }
+}   
