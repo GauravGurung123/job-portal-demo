@@ -30,6 +30,11 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     
+    Route::get('/password/forgot', [LoginController::class, 'showForgotForm'])->name('forgot-pwd-form');
+    Route::post('/password/reset', [LoginController::class, 'resetPassword'])->name('reset-pwd');
+    Route::post('/password/reset-now', [LoginController::class, 'resetPasswordNow'])->name('reset-pwd-now');
+    Route::get('/password/reset/{token}',[LoginController::class, 'showResetPasswordForm'])->name('reset-pwd-form');
+
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::view('/register', 'dashboard.admin.register')->name('register');
     Route::post('/login', [LoginController::class, 'loginProcess'])->name('login-process');

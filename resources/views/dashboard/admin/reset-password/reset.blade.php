@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Login</title>
+    <title>Reset Password</title>
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,35 +21,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4" style="margin-top: 45px">
-                 <h4>Admin Login</h4><hr>
-                 <form action="{{ route('admin.login-process') }}" method="post">
+                 <h4>Reset Password</h4><hr>
+                 <form action="{{ route('admin.reset-pwd-now') }}" method="post">
                     @if (Session::get('fail'))
                         <div class="alert alert-danger">
                             {{ Session::get('fail') }}
                         </div>
                     @endif
-                    @if (Session::get('info'))
-                        <div class="alert alert-success">
-                            {{ Session::get('info') }}
-                        </div>
-                    @endif
                     @csrf
+                    <input type="hidden" name="token" value="{{$token}}" />
                      <div class="form-group">
                          <label for="email">Email</label>
-                         <input type="text" class="form-control" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+                         <input type="text" class="form-control" name="email"  value="{{ $email ?? old('email') }}">
                          <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                      </div>
                      <div class="form-group my-2">
-                         <label for="password">Password</label>
-                         <input type="password" class="form-control" name="password" placeholder="Enter password" value="{{ old('password') }}">
+                         <label for="password">New Password</label>
+                         <input type="password" class="form-control" name="password" placeholder="Enter your new password">
                          <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                      </div>
-                    <a href="{{route('admin.forgot-pwd-form')}}">Forgot Password?</a>
                      <div class="form-group my-2">
-                         <button type="submit" class="btn btn-primary">Login</button>
+                        <label for="password">Confirm Password</label>
+                        <input type="password" class="form-control" name="cpassword" placeholder="Enter password to confirm" >
+                        <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
+                    </div>
+                    
+                     <div class="form-group my-2">
+                         <button type="submit" class="btn btn-primary">Reset Password Now</button>
                      </div>
                     <p>
-                    <a href="{{ route('admin.register') }}">Create new Account</a>
+                    <a href="{{ route('admin.login') }}">Login</a>
                     </p>
                  </form>
             </div>
