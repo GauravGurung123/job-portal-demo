@@ -31,7 +31,7 @@
                 data-accordion="false"
             >
     
-                {{-- @can('view-users')                     --}}
+                @can('view-users')                    
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-user"></i>
@@ -57,33 +57,14 @@
                 
                     </ul>
                 </li>  
-                {{-- @endcan --}}
+                @endcan
 
                 @can('view-roles')                    
                 <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-drafting-compass"></i>
-                        <p>
-                        Roles
-                        <i class="fas fa-angle-left right"></i>
-                        </p>
+                        <p>Roles</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.roles.index')}}" class="nav-link">
-                                <i class="fas fa-chevron-right nav-icon"></i>
-                                <p>Roles Lists</p>
-                            </a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-chevron-right nav-icon"></i>
-                                <p>Role Config</p>
-                            </a>
-                        </li>
-                        
-                    </ul>
                 </li>
                 @endcan
 
@@ -91,28 +72,45 @@
                 <li class="nav-item">
                     <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                        Permissions
-                        <i class="fas fa-angle-left right"></i>
-                        </p>
+                        <p>Permissions</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.permissions.index')}}" class="nav-link">
-                                <i class="fas fa-chevron-right nav-icon"></i>
-                                <p>Permissions Lists</p>
-                            </a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-chevron-right nav-icon"></i>
-                                <p>Permission Config</p>
-                            </a>
-                        </li>
-                        
-                    </ul>
                 </li>
+                @endcan
+
+                @can('view-jobs')                    
+                <li class="nav-item">
+                    <a href="{{route('admin.jobs.index')}}" class="nav-link">
+                        <i class="fa fa-briefcase ml-1"></i>
+                        <p> &nbsp;   Jobs</p>
+                    </a>
+                </li>  
+                @endcan
+
+                @can('view-industries')                    
+                <li class="nav-item">
+                    <a href="{{route('admin.industries.index')}}" class="nav-link">
+                        <i class="fa fa-industry ml-1"></i>
+                        <p> &nbsp;   Industries</p>
+                    </a>
+                </li>  
+                @endcan
+
+                @can('view-locations')                    
+                <li class="nav-item">
+                    <a href="{{route('admin.locations.index')}}" class="nav-link">
+                        <i class="fa fa-map-marker ml-1"></i>
+                        <p class="ml-2">&nbsp;  Locations</p>
+                    </a>
+                </li>  
+                @endcan
+
+                @can('view-skills')                    
+                <li class="nav-item">
+                    <a href="{{route('admin.skills.index')}}" class="nav-link">
+                        <i class="fa fa-paint-brush"></i>
+                        <p> &nbsp;   Skills</p>
+                    </a>
+                </li>  
                 @endcan
 
                 <li class="nav-item">

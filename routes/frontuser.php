@@ -4,8 +4,12 @@ use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Admin\Dashboard\User\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\Dashboard\Industry\IndustryController;
+use App\Http\Controllers\Admin\Dashboard\Job\JobController;
+use App\Http\Controllers\Admin\Dashboard\Location\LocationController;
 use App\Http\Controllers\Admin\Dashboard\RolePermission\PermissionController;
 use App\Http\Controllers\Admin\Dashboard\RolePermission\RoleController;
+use App\Http\Controllers\Admin\Dashboard\Skill\SkillController;
 use App\Http\Controllers\Admin\Dashboard\User\EmployerController;
 use App\Http\Controllers\Admin\Dashboard\User\JobseekerController;
 use App\Http\Controllers\Admin\Dashboard\UserController;
@@ -46,10 +50,18 @@ Route::group([
         Route::patch('usr-a/change-permission/{id}', [AdminController::class, 'changePermission'])->name('changePermission');
         Route::patch('usr-a/change-password/{id}', [AdminController::class, 'changePassword'])->name('changePwd');
         Route::resource('usr-a', AdminController::class);
+        
         Route::resource('usr-e', EmployerController::class);
         Route::resource('usr-j', JobseekerController::class);
+        
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
+
+        Route::resource('locations', LocationController::class);
+        Route::resource('industries', IndustryController::class);
+        Route::resource('skills', SkillController::class);
+        Route::resource('jobs', JobController::class);
+
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/dashboard/users', [UserController::class, 'userList'])->name('dashboard-users-list');
         Route::get('/{username}', [AdminDashboardController::class, 'show'])->name('profile');
