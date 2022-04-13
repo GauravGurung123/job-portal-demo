@@ -20,6 +20,7 @@ class IndustrySeeder extends Seeder
             ['name' => 'telecom', 'slug' => 'telecom', 'created_at' => '2021-01-03 14:16:18'],
             ['name' => 'bank', 'slug' => 'bank', 'created_at' => '2022-01-03 14:16:18'],
             ['name' => 'education', 'slug' => 'education', 'created_at' => '2022-05-03 14:16:18'],
+            ['name' => 'hotel', 'slug' => 'hotel', 'created_at' => '2022-05-03 14:16:18'],
         ];
 
         Industry::insert($industries);

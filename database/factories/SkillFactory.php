@@ -16,7 +16,7 @@ class SkillFactory extends Factory
         $models = ['App\Models\Jobseeker', 'App\Models\Employer'];
 
         return [
-            'skillable_id' => rand(1,10),
+            'skillable_id' => rand(1,20),
             'skillable_type' => $models[rand(0,1)],
             'name' => $this->faker->word(),
             'slug' => $this->faker->word(),

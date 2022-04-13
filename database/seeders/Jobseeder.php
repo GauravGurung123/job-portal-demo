@@ -14,7 +14,7 @@ class JobSeeder extends Seeder
      */
     public function run()
     {
-        Job::factory(10)->create();
+        Job::factory(20)->create();
         $this->command->info('Inserted '.count(Job::all()).' job records.');
 
     }

@@ -27,8 +27,8 @@ class CreateAdminsTable extends Migration
             $table->string('token')->unique()->nullable();
             $table->dateTime('token_expiry')->nullable();
             $table->timestamp('last_logged_in')->nullable();
-            $table->string('status')->nullable();
-
+            $table->enum('status', ['Active', 'Blocked'])->default('Active');
+        
             $table->timestamps();
 
             // $table->index(['name','username','email'], $name='fulltext_index_for_admins');

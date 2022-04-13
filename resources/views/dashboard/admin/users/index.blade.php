@@ -44,6 +44,7 @@
                     <thead>
                         <tr>
                             <th>S/N</th>
+                            <th>Status</th>
                             <th>User</th>
                             <th>Username</th>
                             <th>Email Address</th>
@@ -58,6 +59,9 @@
                             <tr>
                                 
                                 <td>{{++$key}}</td>
+                                <td>
+                                <span class="badge badge-@if($admin['status'] == 'Active')success @elseif($admin['status'] == 'Blocked')danger @endif ">{{$admin['status']}}</span>   
+                                </td>
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->username }}</td>
                                 <td>{{ $admin->email }}</td>
@@ -128,6 +132,7 @@
                     <thead>
                         <tr>
                             <th>S/N</th>
+                            <th>Status</th>
                             <th>Username</th>
                             <th>Organisation</th>
                             <th>Email Address</th>
@@ -140,6 +145,9 @@
                             <tr>
                                 
                                 <td>{{++$key}}</td>
+                                <td>
+                                    <span class="badge badge-@if($employer['status'] == 'Active')success @elseif($employer['status'] == 'Blocked')danger @endif ">{{$employer['status']}}</span>   
+                                </td>
                                 <td>{{ $employer->username }}</td>
                                 <td>{{ $employer->org_name }}</td>
                                 <td>{{ $employer->email }}</td>
@@ -204,6 +212,7 @@
                     <thead>
                         <tr>
                             <th>S/N</th>
+                            <th>Status</th>
                             <th>Fullname</th>
                             <th>username</th>
                             <th>Email Address</th>
@@ -216,6 +225,9 @@
                             <tr>
                                 
                                 <td>{{++$key}}</td>
+                                <td>
+                                    <span class="badge badge-@if($jobseeker['status'] == 'Active')success @elseif($jobseeker['status'] == 'Blocked')danger @endif ">{{$jobseeker['status']}}</span>   
+                                </td>
                                 <td>{{ $jobseeker->name }}</td>
                                 <td>{{ $jobseeker->username }}</td>
                                 <td>{{ $jobseeker->email }}</td>
