@@ -24,5 +24,10 @@ class Industry extends Model
     {
         return $this->hasMany('App\Models\Employer', 'industry_id', 'id');
     }
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Models\Job', 'industry_id', 'id');
+    }
 }
 

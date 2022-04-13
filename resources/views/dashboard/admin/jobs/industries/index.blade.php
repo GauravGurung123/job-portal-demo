@@ -28,22 +28,36 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Industry Name</th>
-                            <th>Action</th>
+                          <th>Industry Name</th>
+                          <th>Company</th>
+                          <th>Vacancy</th>
+                          <th>Active</th>
+                          <th>Action</th>
                       </tr>
                         </thead>
                         <tbody>
                         @foreach($industries as $industry)
                         <tr>
-                        <td>{{$industry->name}}</td>
+                        <td>{{ucwords($industry->name)}}</td>
+                        <td>{{$industry->employers->count($industry->id)}}</td>
+                        <td>{{count($industry->jobs)}}</td>
+                        <td>
+                          {{$c=null}}
+                          @foreach ($active_jobs as $active)
+                            @if ($active->industry_id==$industry->id)
+                               <?php $c =$c+1 ?>
+                            @endif
+                          @endforeach
+                          {{$c ?? 0}}
+                        </td>
                         <td class="d-flex">
                             <div class="btn-group">
-                              @can('update-industrys')
+                              @can('update-industries')
                               <a href="{{route('admin.industries.edit', $industry->id)}}" class="btn btn-outline-info m-1">
                                   <i class="fa fa-pencil"></i>
                               </a>
                               @endcan
-                                @can('delete-industrys')                                      
+                                @can('delete-industries')                                      
                                 <form action="{{route('admin.industries.destroy',['industry'=> $industry->id])}}" method="POST" >
                                     @method('DELETE')
                                     @csrf

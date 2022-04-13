@@ -25,4 +25,10 @@ class Location extends Model
     {
         return $this->hasMany('App\Models\Employer', 'location_id', 'id');
     }
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Models\Job', 'location_id', 'id');
+    }
+
 }

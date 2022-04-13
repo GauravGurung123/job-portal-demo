@@ -79,13 +79,13 @@ class Employer extends Authenticatable
     }
     
     /**
-     * employer belongs to only one location
+     * Employer belongs to only one location
      *
      * @return void
      */
     public function location()
     {
-        return $this->belongsTo('App\Models\Industry', 'location_id', 'id');
+        return $this->belongsTo('App\Models\Location', 'location_id', 'id');
     }
     
     /**

@@ -15,7 +15,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        return  view('dashboard.admin.jobs.index', ['jobs'=>Job::all()]);
+        return  view('dashboard.admin.jobs.index', ['jobs'=>Job::paginate(10)]);
     }
 
     /**

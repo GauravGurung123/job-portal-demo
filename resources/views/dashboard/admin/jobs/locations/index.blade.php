@@ -29,6 +29,8 @@
                         <thead>
                         <tr>
                             <th>Location Name</th>
+                            <th>Employer</th>
+                            <th>Total</th>
                             <th>Action</th>
                       </tr>
                         </thead>
@@ -36,6 +38,16 @@
                         @foreach($locations as $location)
                         <tr>
                         <td>{{$location->name}}</td>
+                        <td>
+                          {{$c=null}}
+                        @foreach ($location->employers as $emp)
+                        @if ($emp->location_id==$location->id)                          
+                        ({{$emp->org_name}})
+                        <?php $c =$c+1 ?>
+                        @endif
+                        @endforeach
+                        </td>
+                        <td>{{$c}}</td>
                         <td class="d-flex">
                             <div class="btn-group">
                               @can('update-locations')

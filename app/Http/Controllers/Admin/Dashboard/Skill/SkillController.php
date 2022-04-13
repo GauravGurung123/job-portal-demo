@@ -15,7 +15,7 @@ class SkillController extends Controller
      */
     public function index()
     {
-        return  view('dashboard.admin.jobs.skills.index', ['skills'=>Skill::all()]);   
+        return  view('dashboard.admin.jobs.skills.index', ['skills'=>Skill::paginate(10)]);   
     }
 
     /**

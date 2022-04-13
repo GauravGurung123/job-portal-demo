@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dashboard\Industry;
 
 use App\Http\Controllers\Controller;
 use App\Models\Industry;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class IndustryController extends Controller
@@ -15,7 +16,11 @@ class IndustryController extends Controller
      */
     public function index()
     {
-        return  view('dashboard.admin.jobs.industries.index', ['industries'=>Industry::all()]);
+        $industries = Industry::paginate(10);
+        $activeJobs = Job::where('status', 'Active')->get();
+        // dd($activeJobs);
+        
+        return  view('dashboard.admin.jobs.industries.index', ['industries'=>$industries,'active_jobs'=> $activeJobs]);
     }
 
     /**

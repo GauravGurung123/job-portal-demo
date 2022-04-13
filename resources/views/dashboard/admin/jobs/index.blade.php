@@ -29,6 +29,12 @@
                         <thead>
                         <tr>
                             <th>Job Name</th>
+                            <th>Industry</th>
+                            <th>Location</th>
+                            <th>Recruiter</th>
+                            <th>Job Type</th>
+                            <th>Status</th>
+                            <th>Views</th>
                             <th>Action</th>
                       </tr>
                         </thead>
@@ -36,6 +42,14 @@
                         @foreach($jobs as $job)
                         <tr>
                         <td>{{$job->title}}</td>
+                        <td>{{ucwords($job->industry->name)}}</td>
+                        <td>{{ucwords($job->location->name)}}</td>
+                        <td>{{ucwords($job->employer->org_name)}}</td>
+                        <td>{{$job['job_type']}}</td>
+                        <td>
+                          <span class="badge badge-@if($job['status'] == 'Active')success @elseif($job['status'] == 'Pending')primary @elseif($job['status'] == 'Rejected')danger @elseif($job['status'] == 'Expired')warning @endif ">{{$job['status']}}</span>   
+                        </td>
+                        <td>{{$job->views}}</td>
                         <td class="d-flex">
                             <div class="btn-group">
                               @can('update-jobs')

@@ -15,7 +15,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        return  view('dashboard.admin.jobs.locations.index', ['locations'=>Location::all()]);
+        return  view('dashboard.admin.jobs.locations.index', ['locations'=>Location::paginate(10)]);
     }
 
     /**

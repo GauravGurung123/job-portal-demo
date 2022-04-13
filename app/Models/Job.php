@@ -66,5 +66,26 @@ class Job extends Model
     {
         return $this->hasMany('App\Models\JobApplication', 'job_id', 'id');
     }
+
+    /**
+     * Job belongs to only one location
+     *
+     * @return void
+     */
+    public function location()
+    {
+        return $this->belongsTo('App\Models\Location', 'location_id', 'id');
+    }
+    
+    /**
+     * Job belongs to only one Industry
+     *
+     * @return void
+     */
+    public function industry()
+    {
+        return $this->belongsTo('App\Models\Industry', 'industry_id', 'id');
+    }
+    
 }
 

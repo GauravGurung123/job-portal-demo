@@ -21,7 +21,7 @@ class UserController extends Controller
             $admins = Admin::whereRaw("MATCH(username, name, email) AGAINST(? IN BOOLEAN MODE)", [$admin_search])->whereNotIn('name', ['super admin'])->get();
         } else {            
             if (auth()->user()->hasRole('super admin')){
-                $admins = Admin::all();
+                $admins = Admin::paginate(10);
             }else{
                 $admins = Admin::with('roles')->whereNotIn('name', ['super admin'])->get();            
             }
@@ -30,14 +30,14 @@ class UserController extends Controller
         if($employer_search != null){
             $employers = Employer::whereRaw("MATCH(username, org_name, email) AGAINST(? IN BOOLEAN MODE)", [$employer_search])->get();
         } else {        
-            $employers = Employer::all();
+            $employers = Employer::paginate(10);
         }
         
         if($jobseeker_search != null){            
             $jobseekers = Admin::whereRaw("MATCH(name, username, email) AGAINST(? IN BOOLEAN MODE)", [$jobseeker_search])->get();
             // where('username', 'like', "%$jobseeker_search%")->orWhere('name', 'like', "%$jobseeker_search%")->get(); 
         } else {
-            $jobseekers = Jobseeker::all();
+            $jobseekers = Jobseeker::paginate(10);
         }
         
         $roles = Role::all();
