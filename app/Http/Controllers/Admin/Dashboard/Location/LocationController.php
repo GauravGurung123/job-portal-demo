@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard\Location;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,12 @@ class LocationController extends Controller
      */
     public function index()
     {
-        return  view('dashboard.admin.jobs.locations.index', ['locations'=>Location::paginate(10)]);
+        $activeJobs = Job::where('status', 'Active')->get();
+        return  view('dashboard.admin.jobs.locations.index',
+ [   
+            'locations'=>Location::paginate(10),
+            'active_jobs'=>$activeJobs,
+        ]);
     }
 
     /**

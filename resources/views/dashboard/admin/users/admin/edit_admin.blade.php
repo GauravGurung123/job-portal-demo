@@ -80,6 +80,7 @@
 </style>
 
 <!-- jQuery -->
+<script src="{{ asset('vendor/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <script src="{{ asset('vendor/plugins/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript">
     $(function() {

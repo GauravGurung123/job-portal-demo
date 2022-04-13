@@ -69,13 +69,14 @@
       </div>
       <!-- /.box-body -->
       {{$permissions->links()}}
+      <style>
+        .w-5{display: none;}
+      </style>
     </div>
     <!-- /.box -->
         
   </div>
   <!-- /.col -->
 </div>
-<style>
-.w-5{display: none;}
-</style>
+
 @endsection

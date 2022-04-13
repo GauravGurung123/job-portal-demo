@@ -83,6 +83,10 @@
                 </div>
             </div>
             <!-- /.box-body -->
+            {{$industries->links()}}
+            <style>
+              .w-5{display: none;}
+            </style>
         </div>
         <!-- /.box -->
 

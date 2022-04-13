@@ -19,7 +19,7 @@ class JobFactory extends Factory
     {
         return [
             'employer_id' => Employer::all()->random()->id,
-            'skill_id' => Skill::all()->random()->id,
+            // 'skill_id' => Skill::all()->random()->id,
             'Location_id' => Location::all()->random()->id,
             'industry_id' => Industry::all()->random()->id,
             'title' => $this->faker->unique()->jobTitle(),

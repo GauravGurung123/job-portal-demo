@@ -69,6 +69,10 @@
                 </div>
             </div>
             <!-- /.box-body -->
+            {{$skills->links()}}
+            <style>
+              .w-5{display: none;}
+            </style>
         </div>
         <!-- /.box -->
 

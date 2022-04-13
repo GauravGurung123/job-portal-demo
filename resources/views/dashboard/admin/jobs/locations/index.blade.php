@@ -29,8 +29,10 @@
                         <thead>
                         <tr>
                             <th>Location Name</th>
+                            <th>Vacancy</th>
+                            <th>Active</th>
+                            {{-- <th>Employer</th> --}}
                             <th>Employer</th>
-                            <th>Total</th>
                             <th>Action</th>
                       </tr>
                         </thead>
@@ -38,16 +40,27 @@
                         @foreach($locations as $location)
                         <tr>
                         <td>{{$location->name}}</td>
+                        <td>{{count($location->jobs)}}</td>
+                        <td>
+                          {{$c=null}}
+                          @foreach ($active_jobs as $active)
+                            @if ($active->location_id==$location->id)
+                               <?php $c =$c+1 ?>
+                            @endif
+                          @endforeach
+                          {{$c ?? 0}}
+                        </td>
                         <td>
                           {{$c=null}}
                         @foreach ($location->employers as $emp)
                         @if ($emp->location_id==$location->id)                          
-                        ({{$emp->org_name}})
+                        {{-- ({{$emp->org_name}}) --}}
                         <?php $c =$c+1 ?>
                         @endif
                         @endforeach
+                        {{$c}}
                         </td>
-                        <td>{{$c}}</td>
+                        {{-- <td>{{$c}}</td> --}}
                         <td class="d-flex">
                             <div class="btn-group">
                               @can('update-locations')
@@ -81,6 +94,10 @@
                 </div>
             </div>
             <!-- /.box-body -->
+            {{$locations->links()}}
+            <style>
+              .w-5{display: none;}
+            </style>
         </div>
         <!-- /.box -->
 

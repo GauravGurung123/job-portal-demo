@@ -16,7 +16,7 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();       
             $table->bigInteger('employer_id')->unsigned();       
-            $table->bigInteger('skill_id')->unsigned();  
+            // $table->bigInteger('skill_id')->unsigned();  
             $table->bigInteger('location_id')->unsigned();       
             $table->bigInteger('industry_id')->unsigned();       
             $table->string('title');
@@ -33,13 +33,13 @@ class CreateJobsTable extends Migration
             $table->boolean('featured')->default(0);
 
             $table->date('last_date');
-            $table->integer('views')->unsigned();
+            $table->integer('views')->unsigned()->default(0);
             $table->integer('openings')->unsigned();
             $table->string('slug');
             $table->timestamps();
 
             $table->foreign('employer_id', 'emp_id_fk')->references('id')->on('employers');
-            $table->foreign('skill_id', 'skill_id_fk')->references('id')->on('skills');
+            // $table->foreign('skill_id', 'skill_id_fk')->references('id')->on('skills');
             
             $table->foreign('location_id', 'location_id_fk')->references('id')->on('locations');
             $table->foreign('industry_id', 'industry_id_fk')->references('id')->on('industries');
