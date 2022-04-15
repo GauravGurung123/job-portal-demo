@@ -30,7 +30,7 @@ class IndustryController extends Controller
      */
     public function create()
     {
-        //
+        return  view('dashboard.admin.jobs.industries.add-new');
     }
 
     /**
@@ -41,7 +41,14 @@ class IndustryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Industry::create($validated);
+
+        return redirect()->route('admin.industries.index');
     }
 
     /**
@@ -61,9 +68,11 @@ class IndustryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $industry = Industry::where('slug',$slug)->firstOrFail(); 
+        
+        return view('dashboard.admin.jobs.industries.edit', compact('industry') );
     }
 
     /**
@@ -75,7 +84,14 @@ class IndustryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $industry = Industry::findOrFail($id);
+        
+        $validated = $request->validate(['name'=>'required']);
+
+        $industry->update($validated);
+
+        return redirect()->route('admin.industries.index');
+
     }
 
     /**
@@ -86,6 +102,8 @@ class IndustryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Industry::where('id',$id)->first()->delete();
+
+        return redirect()->back()->withSuccess('Industry has been Deleted successfully');
     }
 }

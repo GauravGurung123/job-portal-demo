@@ -24,6 +24,10 @@
         <div class="box box-solid box-primary">
             <!-- /.box-header -->
             <div class="box-body">
+              @if(session('success'))
+              <div class="alert alert-success">
+                {{ session('success') }}
+              </div>
                 <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
@@ -53,7 +57,7 @@
                         <td class="d-flex">
                             <div class="btn-group">
                               @can('update-industries')
-                              <a href="{{route('admin.industries.edit', $industry->id)}}" class="btn btn-outline-info m-1">
+                              <a href="{{route('admin.industries.edit', $industry->slug)}}" class="btn btn-outline-info m-1">
                                   <i class="fa fa-pencil"></i>
                               </a>
                               @endcan

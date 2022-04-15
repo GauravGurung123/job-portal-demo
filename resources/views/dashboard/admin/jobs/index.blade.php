@@ -16,16 +16,20 @@
     </div><!-- /.container-fluid -->
   </div>
 @endsection
-
 @section('content-main')
 <div class="row">
-    <div class="col-12">
-
-        <div class="box box-solid box-primary">
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table id="example1" class="table table-bordered table-striped">
+  <div class="col-12">
+    
+    <div class="box box-solid box-primary">
+      <!-- /.box-header -->
+      <div class="box-body">
+        @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+        @endif
+        <div class="table-responsive">
+          <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>Job Name</th>
@@ -56,7 +60,7 @@
                         <td>
                           <span class="badge badge-@if($job['status'] == 'Active')success @elseif($job['status'] == 'Pending')primary @elseif($job['status'] == 'Rejected')danger @elseif($job['status'] == 'Expired')warning @endif ">{{$job['status']}}</span>   
                         </td>
-                        <td>{{$job->views}}</td>
+                        <td>{{$job->views ?? 0}}</td>
                         <td class="d-flex">
                             <div class="btn-group">
                               @can('update-jobs')

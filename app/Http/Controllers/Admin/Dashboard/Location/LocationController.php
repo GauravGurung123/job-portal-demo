@@ -31,7 +31,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.jobs.locations.add-new');
     }
 
     /**
@@ -42,7 +42,13 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Location::create($validated);
+
+        return redirect()->route('admin.locations.index');
     }
 
     /**
@@ -62,9 +68,12 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $location = Location::where('slug',$slug)->firstOrFail(); 
+        
+        return view('dashboard.admin.jobs.locations.edit', compact('location') );
+
     }
 
     /**
@@ -76,7 +85,14 @@ class LocationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $location = Location::findOrFail($id);
+        
+        $validated = $request->validate(['name'=>'required']);
+
+        $location->update($validated);
+
+        return redirect()->route('admin.locations.index');
+
     }
 
     /**
@@ -87,6 +103,7 @@ class LocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Location::where('id',$id)->first()->delete();
+        return redirect()->back()->withSuccess('Location has been Deleted successfully');
     }
 }

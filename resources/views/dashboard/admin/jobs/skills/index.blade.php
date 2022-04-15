@@ -20,10 +20,13 @@
 @section('content-main')
 <div class="row">
     <div class="col-12">
-
         <div class="box box-solid box-primary">
             <!-- /.box-header -->
             <div class="box-body">
+              @if(session('success'))
+              <div class="alert alert-success">
+                {{ session('success') }}
+              </div>
                 <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>

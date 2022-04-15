@@ -90,6 +90,7 @@ class SkillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Skill::where('id',$id)->first()->delete();
+        return redirect()->back()->withSuccess('Skill has been Deleted successfully');
     }
 }
