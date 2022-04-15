@@ -19,7 +19,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        return  view('dashboard.admin.jobs.index', ['jobs'=>Job::paginate(10)]);
+        $jobs = Job::with('skills')->paginate(10);
+        return  view('dashboard.admin.jobs.index', compact(['jobs']) );
     }
 
     /**
@@ -31,7 +32,7 @@ class JobController extends Controller
     {
         return  view('dashboard.admin.jobs.add-new-job',
     [
-        'skills' => Skill::all(), 
+        'skills' => Skill::select('name')->distinct()->get(), 
         'employers' => Employer::all(),
         'locations' => Location::all(),
         'industries' => Industry::all(),
@@ -73,7 +74,7 @@ class JobController extends Controller
         $skills = $request->skills;
 
         foreach ($skills as $skill) {
-            skill::create([
+            Skill::create([
                 'skillable_id' => $job->id,
                 'skillable_type' => 'App\Models\Job',
                 'name' => $skill,
@@ -101,9 +102,27 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $job = Job::where('slug',$slug)->with('skills')->firstOrFail(); 
+        $locations = Location::all();
+        $industries = Industry::all();
+        
+        $items =array();
+        foreach($job->skills as $skill) 
+        {
+            $items[] = $skill->name;
+        }
+        $skills = Skill::select('name')
+        ->whereNotIn('name', $items)
+        ->distinct()->get();    
+
+        return view('dashboard.admin.jobs.edit-job', compact([
+            'job',
+            'locations',
+            'industries',
+            'skills',        
+        ]));
     }
 
     /**
@@ -115,7 +134,48 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $job = Job::find($id);
+
+        $validated = $request->validate([
+            'location_id'=> 'required|integer',
+            'industry_id'=> 'required|integer',
+            'title' => 'required|max:255',
+            'description' => 'nullable',
+            'responsibility' => 'nullable',
+            'requirement' => 'nullable',
+            'application_email' => 'required|max:50',
+            'application_url' => 'nullable',
+            'job_type' => 'required',
+            'openings' => 'required',
+            'experience' => 'nullable',
+            'status' => 'required',
+            'last_date' => 'required|max:255',
+            'min_salary' => 'required|integer',
+            'max_salary' => 'required|integer',
+            'last_date' => 'required',
+            'featured' => 'nullable',            
+        ]);
+
+        $job->update($validated);
+
+        $job = Job::where('id',$id)->with('skills')->firstOrFail(); 
+        $skills = $request->skills;
+
+        foreach($job->skills as $skill) 
+        {
+            Skill::where('id', $skill->id)->delete();                   
+        }
+
+        foreach ($skills as $skill) {
+            Skill::create([
+                'skillable_id' => $job->id,
+                'skillable_type' => 'App\Models\Job',
+                'name' => $skill,
+                'slug' => $skill,
+            ]);
+        }
+
+        return redirect()->route('admin.jobs.index');
     }
 
     /**
@@ -125,7 +185,8 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {    
+        Job::where('id',$id)->first()->delete();
+        return redirect()->back()->withSuccess('Job Post has been Deleted');
     }
 }

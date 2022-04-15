@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class SkillController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +26,7 @@ class SkillController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.jobs.skills.add-new');
     }
 
     /**
@@ -36,7 +37,15 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $skills = explode(",", $request->get('skills'));
+
+        foreach ($skills as $skill) {
+            Skill::create([
+                'name' => $skill,
+            ]);
+        }
+
+        return redirect()->route('admin.skills.index');
     }
 
     /**

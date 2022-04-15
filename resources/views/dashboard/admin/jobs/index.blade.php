@@ -29,6 +29,7 @@
                         <thead>
                         <tr>
                             <th>Job Name</th>
+                            {{-- <th>Job Skill</th> --}}
                             <th>Industry</th>
                             <th>Location</th>
                             <th>Recruiter</th>
@@ -42,6 +43,12 @@
                         @foreach($jobs as $job)
                         <tr>
                         <td>{{$job->title}}</td>
+                        {{-- <td>
+                          @foreach ($job->skills as $skill)
+                            @if ($loop->iteration > 1),@endif
+                            {{$skill->name}}
+                          @endforeach
+                        </td> --}}
                         <td>{{ucwords($job->industry->name)}}</td>
                         <td>{{ucwords($job->location->name)}}</td>
                         <td>{{ucwords($job->employer->org_name)}}</td>
@@ -53,7 +60,7 @@
                         <td class="d-flex">
                             <div class="btn-group">
                               @can('update-jobs')
-                              <a href="{{route('admin.jobs.edit', $job->id)}}" class="btn btn-outline-info m-1">
+                              <a href="{{route('admin.jobs.edit', $job->slug)}}" class="btn btn-outline-info m-1">
                                   <i class="fa fa-pencil"></i>
                               </a>
                               @endcan

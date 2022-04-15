@@ -37,10 +37,13 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        Permission::create([
-            'name' => $request->name
-        ]);
-        
+        $permissions = explode(",", $request->get('name'));
+
+        foreach ($permissions as $permission) {
+            Permission::create([
+                'name' => $permission,
+            ]);
+        }        
         return redirect()->route('admin.permissions.index');
 
     }

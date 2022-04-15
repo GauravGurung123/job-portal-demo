@@ -144,9 +144,9 @@
                 <h5>skills</h5>
                 <div class="control">
                     @foreach ($skills as $skill)
-                        <input type="checkbox" id="checkbox_skill{{$skill->id}}" name="skills[]"
-                                value="{{$skill->id}}">
-                        <label for="checkbox_skill{{$skill->id}}">{{$skill->name}}</label>
+                        <input type="checkbox" id="checkbox_skill{{$skill->name}}" name="skills[]"
+                                value="{{$skill->name}}">
+                        <label for="checkbox_skill{{$skill->name}}">{{$skill->name}}</label>
 
                     @endforeach
                 </div>
