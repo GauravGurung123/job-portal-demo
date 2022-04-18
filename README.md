@@ -15,7 +15,7 @@ Login credentials for `admin` role
 Download the repository by either downloading the zip or using git clone command
 
 ```bash
-git clone 
+git clone git@github.com:GauravGurung123/job-portal-demo.git
 ```
 
 Copy content of `.env.example` to a new file named `.env` in project root directory.
