@@ -25,9 +25,10 @@
             <!-- /.box-header -->
             <div class="box-body">
               @if(session('success'))
-              <div class="alert alert-success">
-                {{ session('success') }}
-              </div>
+                <div class="alert alert-success">
+                  {{ session('success') }}
+                </div>
+              @endif
                 <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
@@ -43,14 +44,14 @@
                         @foreach($industries as $industry)
                         <tr>
                         <td>{{ucwords($industry->name)}}</td>
-                        <td>{{$industry->employers->count($industry->id)}}</td>
-                        <td>{{count($industry->jobs)}}</td>
+                        <td>{{$industry->employers_count}}</td>
+                        <td>{{$industry->jobs_count}}</td>
                         <td>
                           {{$c=null}}
-                          @foreach ($active_jobs as $active)
+                          @foreach ($activeJobs as $active)
                             @if ($active->industry_id==$industry->id)
-                               <?php $c =$c+1 ?>
-                            @endif
+                               <?php   $c =$c+1 ?>
+                            @endif 
                           @endforeach
                           {{$c ?? 0}}
                         </td>

@@ -16,11 +16,16 @@ class IndustryController extends Controller
      */
     public function index()
     {
-        $industries = Industry::paginate(10);
+        $industries = Industry::withCount(['jobs', 'employers'])->paginate(10);
+        
         $activeJobs = Job::where('status', 'Active')->get();
+        // $activeJobs = Job::join('industries','jobs.industry_id', '=', 'industries.id')
+        // ->where('jobs.status', 'Active')->get('jobs.industry_id');
+
         // dd($activeJobs);
         
-        return  view('dashboard.admin.jobs.industries.index', ['industries'=>$industries,'active_jobs'=> $activeJobs]);
+        return  view('dashboard.admin.jobs.industries.index',
+         ['industries'=>$industries,'activeJobs'=> $activeJobs]);
     }
 
     /**

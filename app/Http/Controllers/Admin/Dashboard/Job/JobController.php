@@ -19,7 +19,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::with('skills')->paginate(10);
+        $jobs = Job::with(['skills','employer', 'industry', 'location'])->paginate(10);
         return  view('dashboard.admin.jobs.index', compact(['jobs']) );
     }
 

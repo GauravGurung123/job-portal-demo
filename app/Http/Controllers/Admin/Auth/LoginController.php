@@ -17,12 +17,12 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
     function show() {
-        return view('dashboard.admin.login');
+        return view('dashboard.admin.auth.login');
     } 
 
     public function showForgotForm()
     {
-        return view('dashboard.admin.forgot');        
+        return view('dashboard.admin.auth.forgot');        
     }
 
     public function resetPassword(Request $request)

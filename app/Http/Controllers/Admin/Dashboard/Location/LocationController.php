@@ -19,7 +19,7 @@ class LocationController extends Controller
         $activeJobs = Job::where('status', 'Active')->get();
         return  view('dashboard.admin.jobs.locations.index',
  [   
-            'locations'=>Location::paginate(10),
+            'locations'=>Location::with('employers')->withCount(['jobs'])->paginate(10),
             'active_jobs'=>$activeJobs,
         ]);
     }

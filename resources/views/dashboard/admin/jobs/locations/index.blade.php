@@ -28,6 +28,7 @@
               <div class="alert alert-success">
               {{ session('success') }}
               </div>
+              @endif
               <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -44,7 +45,7 @@
                     @foreach($locations as $location)
                     <tr>
                     <td>{{$location->name}}</td>
-                    <td>{{count($location->jobs)}}</td>
+                    <td>{{$location->jobs_count}}</td>
                     <td>
                       {{$c=null}}
                       @foreach ($active_jobs as $active)

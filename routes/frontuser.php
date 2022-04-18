@@ -40,7 +40,7 @@ Route::group([
     Route::get('/password/reset/{token}',[LoginController::class, 'showResetPasswordForm'])->name('reset-pwd-form');
 
     Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::view('/register', 'dashboard.admin.register')->name('register');
+    Route::view('/register', 'dashboard.admin.auth.register')->name('register');
     Route::post('/login', [LoginController::class, 'loginProcess'])->name('login-process');
     Route::post('/create', [RegisterController::class, 'store'])->name('create');
     
@@ -49,18 +49,18 @@ Route::group([
         Route::patch('usr-a/change-role/{id}', [AdminController::class, 'changeRole'])->name('changeRole');
         Route::patch('usr-a/change-permission/{id}', [AdminController::class, 'changePermission'])->name('changePermission');
         Route::patch('usr-a/change-password/{id}', [AdminController::class, 'changePassword'])->name('changePwd');
-        Route::resource('usr-a', AdminController::class);
-        
-        Route::resource('usr-e', EmployerController::class);
-        Route::resource('usr-j', JobseekerController::class);
-        
-        Route::resource('roles', RoleController::class);
-        Route::resource('permissions', PermissionController::class);
-
-        Route::resource('locations', LocationController::class);
-        Route::resource('industries', IndustryController::class);
-        Route::resource('skills', SkillController::class);
-        Route::resource('jobs', JobController::class);
+       
+        Route::resources([
+            'industries'  => IndustryController::class,
+            'jobs'        => JobController::class,
+            'locations'   => LocationController::class,
+            'permissions' => PermissionController::class,
+            'roles'       => RoleController::class,
+            'skills'      => SkillController::class,
+            'usr-a'       => AdminController::class,
+            'usr-e'       => EmployerController::class,
+            'usr-j'       => JobseekerController::class,
+        ]);
 
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/dashboard/users', [UserController::class, 'userList'])->name('dashboard-users-list');

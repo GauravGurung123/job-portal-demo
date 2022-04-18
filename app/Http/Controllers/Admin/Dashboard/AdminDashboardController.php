@@ -14,19 +14,19 @@ class AdminDashboardController extends Controller
 
     public function dashboard()
     {
-        $admins = Admin::all()->count();
+        $admins = Admin::count();
 
-        $employers = Employer::all()->count();
+        $employers = Employer::count();
         $employers=$employers?$employers:0;
-        $activeEmployerPercent=round((Employer::where('status', 'Active')->get()->count()/$employers)*100);
+        $activeEmployerPercent=round((Employer::where('status', 'Active')->count()/$employers)*100);
         
-        $jobseekers = Jobseeker::all()->count();
+        $jobseekers = Jobseeker::count();
         $jobseekers=$jobseekers?$jobseekers:0;
-        $activeJobseekerPercent=round((Jobseeker::where('status', 'Active')->get()->count()/$jobseekers)*100);
+        $activeJobseekerPercent=round((Jobseeker::where('status', 'Active')->count()/$jobseekers)*100);
         
-        $jobs=Job::all()->count();
+        $jobs=Job::count();
         $jobs=$jobs?$jobs:0;
-        $activeJobPercent=round((Job::where('status', 'Active')->get()->count()/$jobs)*100);
+        $activeJobPercent=round((Job::where('status', 'Active')->count()/$jobs)*100);
         
         return view('dashboard.admin.index', compact(
             ['admins','employers','jobseekers','jobs', 'activeJobPercent', 'activeJobseekerPercent', 'activeEmployerPercent']
