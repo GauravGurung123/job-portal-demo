@@ -5,6 +5,7 @@
 Login credentials for `SuperAdmin` role
 -   Email: superadmin@superadmin.com
 -   Password: password
+
 Login credentials for `admin` role
 -   Email: admin@admin.com
 -   Password: password
